@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: L5RGui Plug-in
+Bundle-SymbolicName: L5RGui; singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Activator: fr.lb.l5r.gui.Activator
+Bundle-Localization: plugin
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.ui.forms
+Eclipse-LazyStart: true
+Bundle-ClassPath: lib/hibernate-all.jar,
+ lib/jboss-ejb3-all.jar,
+ lib/jcainflow.jar,
+ lib/jms-ra.jar,
+ lib/log4j-1.2.14.jar,
+ lib/thirdparty-all.jar,
+ .,
+ conf/
