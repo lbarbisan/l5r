@@ -4,7 +4,6 @@
 package fr.lb.l5r.business.beans;
 
 import java.io.File;
-import java.net.URL;
 import java.util.Hashtable;
 
 import javax.naming.InitialContext;
@@ -30,7 +29,7 @@ public class EntityBeanTest {
 
 	private static InitialContext ctx;
 	private static IEntityLocal local;
-	private static int id;
+	private static IEntity entity;
 	
 	/**
 	 * @throws java.lang.Exception
@@ -38,17 +37,14 @@ public class EntityBeanTest {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		
-try {
-			
+		try {			
 			EJB3StandaloneBootstrap.boot(null);
-			EJB3StandaloneBootstrap.scanClasspath();
+			EJB3StandaloneDeployer deployer = EJB3StandaloneBootstrap.createDeployer();
+		    File file = new File("G:\\Projects\\L5R\\L5RGui\\");
+		    deployer.getDeployDirs().add(file.toURL());
 
-			//EJB3StandaloneDeployer deployer = EJB3StandaloneBootstrap.createDeployer();
-			//URL res = Thread.currentThread().getContextClassLoader().getResource("META-INF/persistence.xml");
-			//URL path = EJB3StandaloneDeployer.getDeployDirFromResource(res, "META-INF/persistence.xml");
-		    //deployer.getDeployDirs().add(res);	
-			//deployer.create();
-			//deployer.start();
+		    deployer.create();
+		    deployer.start();
 
 			ctx = getInitialContext();
 			local = (IEntityLocal) ctx.lookup("EntityBean/local");
@@ -87,7 +83,7 @@ try {
 	 */
 	@Test
 	public void testCreate() throws NamingException {
-		id = local.create(PersonnageJoueur.class, "name", "Gavin");
+		entity = local.create(PersonnageJoueur.class, "name", "Gavin");
 	}
 
 	/**
@@ -96,7 +92,7 @@ try {
 	 */
 	@Test
 	public void testFind() {
-		IEntity cust = local.find(PersonnageJoueur.class, id);
+		entity = local.find(PersonnageJoueur.class, entity.getId());
 	}
 	
 	

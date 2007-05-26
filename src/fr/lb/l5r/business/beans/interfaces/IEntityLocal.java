@@ -18,16 +18,9 @@ public interface IEntityLocal {
 	 * @param entityClass type de la classe métier
 	 * @param properties liste des propriétés sous la forme suivante :
 	 *  <nom>, <valeur>, <nom>, <valeur>
-	 * @return id du nouvel objet
+	 * @return nouvel objet
 	 */
-	int create(Class entityClass, Object... properties);
-	
-	/**
-	 * @param properties liste des propriétés sous la forme suivante :
-	 *  <nom>, <valeur>, <nom>, <valeur>
-     * @return id du nouvel objet
-	 */
-	//int create(Map<String, Object> properties);
+	IEntity create(Class entityClass, Object... properties);
 
 	/**
 	 * @param entityClass type de la classe métier

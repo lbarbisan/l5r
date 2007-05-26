@@ -29,7 +29,7 @@ public class EntityBean implements IEntityLocal {
 	@PersistenceContext(unitName = "custdb")
 	private EntityManager em;
 
-	public int create(Class entityClass, Object... properties) {
+	public IEntity create(Class entityClass, Object... properties) {
 
 		IEntity entity = null;
 		boolean rollBackNeeded = false;
@@ -66,10 +66,10 @@ public class EntityBean implements IEntityLocal {
 
 		if (rollBackNeeded) {
 			context.setRollbackOnly();
-			return 0;
+			return null;
 		} else {
 			em.persist(entity);
-			return entity.getId();
+			return entity;
 		}
 	}
 
