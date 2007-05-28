@@ -13,7 +13,7 @@ import fr.lb.l5r.business.entities.interfaces.IEntity;
  * @author Administrateur
  *
  */
-public class Entity implements IEntity {
+public class Entity extends AbstractEntity implements IEntity {
 
 	//	identité
 	protected int id;

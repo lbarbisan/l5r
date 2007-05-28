@@ -14,5 +14,4 @@ public interface IEntity extends Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public abstract int getId();
-
 }

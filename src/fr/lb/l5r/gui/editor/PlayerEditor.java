@@ -15,7 +15,6 @@
 package fr.lb.l5r.gui.editor;
 
 import org.eclipse.core.databinding.DataBindingContext;
-import org.eclipse.core.databinding.beans.BeansObservables;
 import org.eclipse.core.databinding.observable.Realm;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.databinding.swt.SWTObservables;
@@ -88,13 +87,13 @@ public class PlayerEditor extends EditorPart {
 
 	private Label lblEarth = null;
 
-	private Text txtEarth = null;
+	private Text txtEarthRing = null;
 
-	private Text txtWater = null;
+	private Text txtWaterRing = null;
 
-	private Text txtFire = null;
+	private Text txtFireRing = null;
 
-	private Text txtAir = null;
+	private Text txtAirRing = null;
 
 	private Label lblWater = null;
 
@@ -110,9 +109,9 @@ public class PlayerEditor extends EditorPart {
 
 	private Label lblVoid = null;
 
-	private Text txtVoid = null;
+	private Text txtVoidRing = null;
 
-	private Text txtPointsSpent = null;
+	private Text txtVoidRingPointsSpent = null;
 
 	private Label lblVoidPointsSpent = null;
 
@@ -287,9 +286,9 @@ public class PlayerEditor extends EditorPart {
 		separator.setLayoutData(gridData1);
 		lblEarth = getFormToolkit().createLabel(compositeRing, "earth");
 		lblEarth.setLayoutData(gridData6);
-		txtEarth = getFormToolkit().createText(compositeRing, null,
+		txtEarthRing = getFormToolkit().createText(compositeRing, null,
 				SWT.SINGLE | SWT.BORDER);
-		txtEarth.setLayoutData(gridData7);
+		txtEarthRing.setLayoutData(gridData7);
 		lblStamina = getFormToolkit().createLabel(compositeRing, "Stamina");
 		txtStamina = getFormToolkit().createText(compositeRing, null,
 				SWT.SINGLE | SWT.BORDER);
@@ -303,9 +302,9 @@ public class PlayerEditor extends EditorPart {
 		separator1.setLayoutData(gridData2);
 		lblWater = getFormToolkit().createLabel(compositeRing, "water");
 		lblWater.setLayoutData(gridData15);
-		txtWater = getFormToolkit().createText(compositeRing, null,
+		txtWaterRing = getFormToolkit().createText(compositeRing, null,
 				SWT.SINGLE | SWT.BORDER);
-		txtWater.setLayoutData(gridData14);
+		txtWaterRing.setLayoutData(gridData14);
 		lblStrength = getFormToolkit().createLabel(compositeRing, "Strength");
 		txtStrength = getFormToolkit().createText(compositeRing, null,
 				SWT.SINGLE | SWT.BORDER);
@@ -320,9 +319,9 @@ public class PlayerEditor extends EditorPart {
 		separator2.setLayoutData(gridData3);
 		lblFire = getFormToolkit().createLabel(compositeRing, "Fire");
 		lblFire.setLayoutData(gridData13);
-		txtFire = getFormToolkit().createText(compositeRing, null,
+		txtFireRing = getFormToolkit().createText(compositeRing, null,
 				SWT.SINGLE | SWT.BORDER);
-		txtFire.setLayoutData(gridData12);
+		txtFireRing.setLayoutData(gridData12);
 		lblAgility = getFormToolkit().createLabel(compositeRing, "Agility");
 		txtAgility = getFormToolkit().createText(compositeRing, null,
 				SWT.SINGLE | SWT.BORDER);
@@ -337,9 +336,9 @@ public class PlayerEditor extends EditorPart {
 		separator3.setLayoutData(gridData4);
 		lblAir = getFormToolkit().createLabel(compositeRing, "Air");
 		lblAir.setLayoutData(gridData10);
-		txtAir = getFormToolkit().createText(compositeRing, null,
+		txtAirRing = getFormToolkit().createText(compositeRing, null,
 				SWT.SINGLE | SWT.BORDER);
-		txtAir.setLayoutData(gridData11);
+		txtAirRing.setLayoutData(gridData11);
 		lblReflexes = getFormToolkit().createLabel(compositeRing, "Reflexes");
 		txtReflexes = getFormToolkit().createText(compositeRing, null,
 				SWT.SINGLE | SWT.BORDER);
@@ -352,14 +351,14 @@ public class PlayerEditor extends EditorPart {
 				compositeRing);
 		separator4.setLayoutData(gridData5);
 		lblVoid = getFormToolkit().createLabel(compositeRing, "Void");
-		txtVoid = getFormToolkit().createText(compositeRing, null,
+		txtVoidRing = getFormToolkit().createText(compositeRing, null,
 				SWT.SINGLE | SWT.BORDER);
-		txtVoid.setLayoutData(gridData24);
+		txtVoidRing.setLayoutData(gridData24);
 		lblVoidPointsSpent = getFormToolkit().createLabel(compositeRing,
 				"PointsSpent");
-		txtPointsSpent = getFormToolkit().createText(compositeRing, null,
+		txtVoidRingPointsSpent = getFormToolkit().createText(compositeRing, null,
 				SWT.SINGLE | SWT.BORDER);
-		txtPointsSpent.setLayoutData(gridData25);
+		txtVoidRingPointsSpent.setLayoutData(gridData25);
 	}
 
 	/**
@@ -449,10 +448,10 @@ public class PlayerEditor extends EditorPart {
 	}
 
 	/**
-	 * @return the txtAir
+	 * @return the txtAirRing
 	 */
-	public Text getTxtAir() {
-		return txtAir;
+	public Text getTxtAirRing() {
+		return txtAirRing;
 	}
 
 	/**
@@ -463,17 +462,17 @@ public class PlayerEditor extends EditorPart {
 	}
 
 	/**
-	 * @return the txtEarth
+	 * @return the txtEarthRing
 	 */
-	public Text getTxtEarth() {
-		return txtEarth;
+	public Text getTxtEarthRing() {
+		return txtEarthRing;
 	}
 
 	/**
-	 * @return the txtFire
+	 * @return the txtFireRing
 	 */
-	public Text getTxtFire() {
-		return txtFire;
+	public Text getTxtFireRing() {
+		return txtFireRing;
 	}
 
 	/**
@@ -491,10 +490,10 @@ public class PlayerEditor extends EditorPart {
 	}
 
 	/**
-	 * @return the txtPointsSpent
+	 * @return the txtVoidRingPointsSpent
 	 */
-	public Text getTxtPointsSpent() {
-		return txtPointsSpent;
+	public Text getTxtVoidRingPointsSpent() {
+		return txtVoidRingPointsSpent;
 	}
 
 	/**
@@ -519,17 +518,17 @@ public class PlayerEditor extends EditorPart {
 	}
 
 	/**
-	 * @return the txtVoid
+	 * @return the txtVoidRing
 	 */
-	public Text getTxtVoid() {
-		return txtVoid;
+	public Text getTxtVoidRing() {
+		return txtVoidRing;
 	}
 
 	/**
-	 * @return the txtWater
+	 * @return the txtWaterRing
 	 */
-	public Text getTxtWater() {
-		return txtWater;
+	public Text getTxtWaterRing() {
+		return txtWaterRing;
 	}
 
 	/**

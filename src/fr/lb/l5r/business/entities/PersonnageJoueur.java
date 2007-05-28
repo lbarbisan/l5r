@@ -8,8 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 
-import org.hibernate.validator.Range;
-
 import fr.lb.l5r.business.entities.interfaces.IEntity;
 
 /**
@@ -34,22 +32,18 @@ public class PersonnageJoueur extends fr.lb.l5r.business.entities.Entity impleme
 	private long insight;
 	
 	//Anneaux de terre
-	private long earthRing;
 	private long stamina = 2;		//CDC:1
-	private long willpower = 2;		//CDC:1
+	private long willPower = 2;		//CDC:1
 
 	//Anneaux d'eau	
-	private long waterRing;
 	private long strength = 2; 		//CDC:1
 	private long perception = 2;	//CDC:1
 
 	//Anneaux de feu
-	private long fireRing;
 	private long agility = 2;		//CDC:1
 	private long intelligence = 2;	//CDC:1
 
 	//Anneaux d'air	
-	private long airRing;
 	private long reflexes = 2;		//CDC:1
 	private long awareness = 2;		//CDC:1
 
@@ -108,23 +102,17 @@ public class PersonnageJoueur extends fr.lb.l5r.business.entities.Entity impleme
 		return agility;
 	}
 	/**
-	 * @param agility the agility to set
-	 */
-	public void setAgility(long agility) {
-		this.agility = agility;
-	}
-	/**
 	 * @return the airRing
 	 */
 	@Transient public long getAirRing() {
-		return airRing;
+		return reflexes>awareness? awareness:reflexes; //CDC:3
 	}
-	/**
-	 * @param airRing the airRing to set
-	 */
-	public void setAirRing(long airRing) {
-		this.airRing = airRing;
-	}
+	///**
+	// * @param airRing the airRing to set
+	// */
+	//public void setAirRing(long airRing) {
+	//	this.airRing = airRing;
+	//}
 	/**
 	 * @return the awareness
 	 */
@@ -133,34 +121,22 @@ public class PersonnageJoueur extends fr.lb.l5r.business.entities.Entity impleme
 		return awareness;
 	}
 	/**
-	 * @param awareness the awareness to set
-	 */
-	public void setAwareness(long awareness) {
-		this.awareness = awareness;
-	}
-	/**
 	 * @return the clan
 	 */
 	public String getClan() {
 		return clan;
 	}
 	/**
-	 * @param clan the clan to set
-	 */
-	public void setClan(String clan) {
-		this.clan = clan;
-	}
-	/**
 	 * @return the earthRing
 	 */
 	@Transient public long getEarthRing() {
-		return earthRing;
+		return stamina>willPower?willPower:stamina; //CDC:3
 	}
 	/**
 	 * @return the fireRing
 	 */
 	@Transient public long getFireRing() {
-		return fireRing;
+		return agility>intelligence?intelligence:agility;
 	}
 	/**
 	 * @return the glory
@@ -169,22 +145,10 @@ public class PersonnageJoueur extends fr.lb.l5r.business.entities.Entity impleme
 		return glory;
 	}
 	/**
-	 * @param glory the glory to set
-	 */
-	public void setGlory(long glory) {
-		this.glory = glory;
-	}
-	/**
 	 * @return the honor
 	 */
 	public long getHonor() {
 		return honor;
-	}
-	/**
-	 * @param honor the honor to set
-	 */
-	public void setHonor(long honor) {
-		this.honor = honor;
 	}
 	/**
 	 * @return the initiative
@@ -194,22 +158,10 @@ public class PersonnageJoueur extends fr.lb.l5r.business.entities.Entity impleme
 		return initiative;
 	}
 	/**
-	 * @param initiative the initiative to set
-	 */
-	public void setInitiative(long initiative) {
-		this.initiative = initiative;
-	}
-	/**
 	 * @return the insight
 	 */
 	@Transient public long getInsight() {
 		return insight;
-	}
-	/**
-	 * @param insight the insight to set
-	 */
-	public void setInsight(long insight) {
-		this.insight = insight;
 	}
 	/**
 	 * @return the intelligence
@@ -219,22 +171,10 @@ public class PersonnageJoueur extends fr.lb.l5r.business.entities.Entity impleme
 		return intelligence;
 	}
 	/**
-	 * @param intelligence the intelligence to set
-	 */
-	public void setIntelligence(long intelligence) {
-		this.intelligence = intelligence;
-	}
-	/**
 	 * @return the name
 	 */
 	public String getName() {
 		return name;
-	}
-	/**
-	 * @param name the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
 	}
 	/**
 	 * @return the perception
@@ -243,22 +183,10 @@ public class PersonnageJoueur extends fr.lb.l5r.business.entities.Entity impleme
 		return perception;
 	}
 	/**
-	 * @param perception the perception to set
-	 */
-	public void setPerception(long perception) {
-		this.perception = perception;
-	}
-	/**
 	 * @return the rank
 	 */
 	public String getRank() {
 		return rank;
-	}
-	/**
-	 * @param rank the rank to set
-	 */
-	public void setRank(String rank) {
-		this.rank = rank;
 	}
 	/**
 	 * @return the reflexes
@@ -268,34 +196,16 @@ public class PersonnageJoueur extends fr.lb.l5r.business.entities.Entity impleme
 		return reflexes;
 	}
 	/**
-	 * @param reflexes the reflexes to set
-	 */
-	public void setReflexes(long reflexes) {
-		this.reflexes = reflexes;
-	}
-	/**
 	 * @return the school
 	 */
 	public String getSchool() {
 		return school;
 	}
 	/**
-	 * @param school the school to set
-	 */
-	public void setSchool(String school) {
-		this.school = school;
-	}
-	/**
 	 * @return the shadowLandsTaint
 	 */
 	public long getShadowLandsTaint() {
 		return shadowLandsTaint;
-	}
-	/**
-	 * @param shadowLandsTaint the shadowLandsTaint to set
-	 */
-	public void setShadowLandsTaint(long shadowLandsTaint) {
-		this.shadowLandsTaint = shadowLandsTaint;
 	}
 	/**
 	 * @return the stamina
@@ -305,23 +215,11 @@ public class PersonnageJoueur extends fr.lb.l5r.business.entities.Entity impleme
 		return stamina;
 	}
 	/**
-	 * @param stamina the stamina to set
-	 */
-	public void setStamina(long stamina) {
-		this.stamina = stamina;
-	}
-	/**
 	 * @return the status
 	 */
 	//@Range(min=1,max=10) //CDC:2
 	public long getStatus() {
 		return status;
-	}
-	/**
-	 * @param status the status to set
-	 */
-	public void setStatus(long status) {
-		this.status = status;
 	}
 	/**
 	 * @return the strength
@@ -331,22 +229,10 @@ public class PersonnageJoueur extends fr.lb.l5r.business.entities.Entity impleme
 		return strength;
 	}
 	/**
-	 * @param strength the strength to set
-	 */
-	public void setStrength(long strength) {
-		this.strength = strength;
-	}
-	/**
 	 * @return the tN
 	 */
 	public long getTN() {
 		return TN;
-	}
-	/**
-	 * @param tn the tN to set
-	 */
-	public void setTN(long tn) {
-		TN = tn;
 	}
 	/**
 	 * @return the voidRing
@@ -356,41 +242,23 @@ public class PersonnageJoueur extends fr.lb.l5r.business.entities.Entity impleme
 		return voidRing;
 	}
 	/**
-	 * @param voidRing the voidRing to set
-	 */
-	public void setVoidRing(long voidRing) {
-		this.voidRing = voidRing;
-	}
-	/**
 	 * @return the voidRingPointsSpent
 	 */
 	public long getVoidRingPointsSpent() {
 		return voidRingPointsSpent;
 	}
 	/**
-	 * @param voidRingPointsSpent the voidRingPointsSpent to set
-	 */
-	public void setVoidRingPointsSpent(long voidRingPointsSpent) {
-		this.voidRingPointsSpent = voidRingPointsSpent;
-	}
-	/**
 	 * @return the waterRing
 	 */
 	@Transient public long getWaterRing() {
-		return waterRing;
+		return strength>perception? perception:strength; //CDC:3
 	}
 	/**
 	 * @return the willpower
 	 */
 	//@Range(min=1,max=10) //CDC:2
-	public long getWillpower() {
-		return willpower;
-	}
-	/**
-	 * @param willpower the willpower to set
-	 */
-	public void setWillpower(long willpower) {
-		this.willpower = willpower;
+	public long getWillPower() {
+		return willPower;
 	}
 	/**
 	 * @return the background
@@ -402,9 +270,20 @@ public class PersonnageJoueur extends fr.lb.l5r.business.entities.Entity impleme
 	 * @param background the background to set
 	 */
 	public void setBackground(String background) {
+		Object oldValue = this.background;
 		this.background = background;
+		firePropertyChange("background", oldValue, this.background);
 	}
-	
+	/**
+	 * @param willPower the willPower to set
+	 */
+	public void setWillPower(long willPower) {
+		Object oldEarthRing = this.getEarthRing();
+		Object oldValue = this.willPower;
+		this.willPower = willPower;
+		firePropertyChange("willPower", oldValue, this.willPower);
+		firePropertyChange("earthRing", oldEarthRing, this.getEarthRing());
+	}
 	/**
 	 * @see fr.lb.l5r.business.entities.Entity#getId()
 	 */
@@ -416,6 +295,182 @@ public class PersonnageJoueur extends fr.lb.l5r.business.entities.Entity impleme
 	 * @param id set the id
 	 */
 	public void setId(int id) {
+		Object oldValue = this.id;
 		this.id = id;
+		firePropertyChange("id", oldValue, this.id);
+	}
+	/**
+	 * @param agility the agility to set
+	 */
+	public void setAgility(long agility) {
+		Object oldFireRing = this.getFireRing();
+		Object oldValue = this.agility;
+		this.agility = agility;
+		firePropertyChange("agility", oldValue, this.agility);
+		firePropertyChange("fireRing", oldFireRing, this.getFireRing());
+	}
+	/**
+	 * @param clan the clan to set
+	 */
+	public void setClan(String clan) {
+		Object oldValue = this.clan;
+		this.clan = clan;
+		firePropertyChange("clan", oldValue, this.clan);
+	}
+	/**
+	 * @param glory the glory to set
+	 */
+	public void setGlory(long glory) {
+		Object oldValue = this.glory;
+		this.glory = glory;
+		firePropertyChange("glory", oldValue, this.glory);
+	}
+	/**
+	 * @param honor the honor to set
+	 */
+	public void setHonor(long honor) {
+		Object oldValue = this.honor;
+		this.honor = honor;
+		firePropertyChange("honor", oldValue, this.honor);
+	}
+	/**
+	 * @param initiative the initiative to set
+	 */
+	public void setInitiative(long initiative) {
+		Object oldValue = this.initiative;
+		this.initiative = initiative;
+		firePropertyChange("initiative", oldValue, this.initiative);
+	}
+	/**
+	 * @param insight the insight to set
+	 */
+	public void setInsight(long insight) {
+		Object oldValue = this.insight;
+		this.insight = insight;
+		firePropertyChange("insight", oldValue, this.insight);
+	}
+	/**
+	 * @param intelligence the intelligence to set
+	 */
+	public void setIntelligence(long intelligence) {
+		Object oldFireRing = this.getFireRing();
+		Object oldValue = this.intelligence;
+		this.intelligence = intelligence;
+		firePropertyChange("intelligence", oldValue, this.intelligence);
+		firePropertyChange("fireRing", oldFireRing,  this.getFireRing());
+	}
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		Object oldValue = this.name;
+		this.name = name;
+		firePropertyChange("name", oldValue, this.name);
+	}
+	/**
+	 * @param perception the perception to set
+	 */
+	public void setPerception(long perception) {
+		Object oldWaterRing = this.getWaterRing();
+		Object oldValue = this.perception;
+		this.perception = perception;
+		firePropertyChange("perception", oldValue, this.perception);
+		firePropertyChange("waterRing", oldWaterRing,  this.getWaterRing());
+	}
+	/**
+	 * @param rank the rank to set
+	 */
+	public void setRank(String rank) {
+		Object oldValue = this.rank;
+		this.rank = rank;
+		firePropertyChange("rank", oldValue, this.rank);
+	}
+	/**
+	 * @param reflexes the reflexes to set
+	 */
+	public void setReflexes(long reflexes) {
+		Object oldAirRing = this.getAirRing();
+		Object oldValue = this.reflexes;
+		this.reflexes = reflexes;
+		firePropertyChange("reflexes", oldValue, this.reflexes);
+		firePropertyChange("airRing", oldAirRing,  this.getAirRing());
+	}
+	/**
+	 * @param school the school to set
+	 */
+	public void setSchool(String school) {
+		Object oldValue = this.school;
+		this.school = school;
+		firePropertyChange("school", oldValue, this.school);
+	}
+	/**
+	 * @param shadowLandsTaint the shadowLandsTaint to set
+	 */
+	public void setShadowLandsTaint(long shadowLandsTaint) {
+		Object oldValue = this.shadowLandsTaint;
+		this.shadowLandsTaint = shadowLandsTaint;
+		firePropertyChange("shadowLandsTaint", oldValue, this.shadowLandsTaint);
+	}
+	/**
+	 * @param stamina the stamina to set
+	 */
+	public void setStamina(long stamina) {
+		Object oldEarthRing = this.getEarthRing();
+		Object oldValue = this.stamina;
+		this.stamina = stamina;
+		firePropertyChange("stamina", oldValue, this.stamina);
+		firePropertyChange("earthRing", oldEarthRing,  this.getEarthRing());
+	}
+	/**
+	 * @param status the status to set
+	 */
+	public void setStatus(long status) {
+		Object oldValue = this.status;
+		this.status = status;
+		firePropertyChange("status", oldValue, this.status);
+	}
+	/**
+	 * @param strength the strength to set
+	 */
+	public void setStrength(long strength) {
+		Object oldWaterRing = this.getWaterRing();
+		Object oldValue = this.strength;
+		this.strength = strength;
+		firePropertyChange("strength", oldValue, this.strength);
+		firePropertyChange("waterRing", oldWaterRing, this.getWaterRing());
+	}
+	/**
+	 * @param tn the tN to set
+	 */
+	public void setTN(long tn) {
+		Object oldValue = TN;
+		TN = tn;
+		firePropertyChange("tn", oldValue, TN);
+	}
+	/**
+	 * @param voidRing the voidRing to set
+	 */
+	public void setVoidRing(long voidRing) {
+		Object oldValue = this.voidRing;
+		this.voidRing = voidRing;
+		firePropertyChange("voidRing", oldValue, this.voidRing);
+	}
+	/**
+	 * @param voidRingPointsSpent the voidRingPointsSpent to set
+	 */
+	public void setVoidRingPointsSpent(long voidRingPointsSpent) {
+		Object oldValue = this.voidRingPointsSpent;
+		this.voidRingPointsSpent = voidRingPointsSpent;
+		firePropertyChange("voidRingPointsSpent", oldValue, this.voidRingPointsSpent);
+	}
+	/**
+	 * @param awareness the awareness to set
+	 */
+	public void setAwareness(long awareness) {
+		Object oldAirRing = this.getAirRing();
+		Object oldValue = this.awareness;
+		this.awareness = awareness;
+		firePropertyChange("awareness", oldValue, this.awareness);
+		firePropertyChange("airRing", oldAirRing,  this.getAirRing());
 	}
 }
