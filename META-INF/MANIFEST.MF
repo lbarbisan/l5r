@@ -7,7 +7,10 @@ Bundle-Activator: fr.lb.l5r.gui.Activator
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- org.eclipse.ui.forms
+ org.eclipse.ui.forms,
+ org.eclipse.core.databinding,
+ org.eclipse.core.databinding.beans,
+ org.eclipse.jface.databinding
 Eclipse-LazyStart: true
 Bundle-ClassPath: lib/hibernate-all.jar,
  lib/jboss-ejb3-all.jar,

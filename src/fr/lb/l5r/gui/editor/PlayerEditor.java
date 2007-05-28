@@ -14,7 +14,11 @@
  *******************************************************************************/
 package fr.lb.l5r.gui.editor;
 
+import org.eclipse.core.databinding.DataBindingContext;
+import org.eclipse.core.databinding.beans.BeansObservables;
+import org.eclipse.core.databinding.observable.Realm;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.jface.databinding.swt.SWTObservables;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
@@ -31,16 +35,18 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.Section;
 import org.eclipse.ui.part.EditorPart;
 
+import fr.lb.l5r.gui.databindings.DataBindingHelper;
+
 /**
  * An editor that presents a chat with a specified participant.
  */
 public class PlayerEditor extends EditorPart {
 
-	public static String ID = "l5rgui.editor.PlayerEditor";  //  @jve:decl-index=0:
+	public static String ID = "l5rgui.editor.PlayerEditor"; // @jve:decl-index=0:
 
 	private Composite top = null;
 
-	private FormToolkit formToolkit = null;   //  @jve:decl-index=0:visual-constraint=""
+	private FormToolkit formToolkit = null; // @jve:decl-index=0:visual-constraint=""
 
 	private Composite composite = null;
 
@@ -48,71 +54,67 @@ public class PlayerEditor extends EditorPart {
 
 	private Composite compositeRing = null;
 
-	private Text text = null;
+	private Text txtWillPower = null;
 
-	private Text text1 = null;
+	private Text txtStamina = null;
 
-	private Label label = null;
+	private Label lblWillPower = null;
 
-	private Label label1 = null;
+	private Label lblStamina = null;
 
-	private Label label2 = null;
+	private Label lblStrength = null;
 
-	private Text text2 = null;
+	private Text txtStrength = null;
 
-	private Label label3 = null;
+	private Label lblPerception = null;
 
-	private Text text3 = null;
+	private Text txtPerception = null;
 
-	private Label label4 = null;
+	private Label lblAgility = null;
 
-	private Text text4 = null;
+	private Text txtAgility = null;
 
-	private Label label5 = null;
+	private Label lblIntelligence = null;
 
-	private Text text5 = null;
+	private Text txtIntelligence = null;
 
-	private Label label6 = null;
+	private Label lblReflexes = null;
 
-	private Label label7 = null;
+	private Label lblAwareness = null;
 
-	private Text text6 = null;
+	private Text txtAwareness = null;
 
-	private Text text61 = null;
+	private Text txtReflexes = null;
 
-	private Text text62 = null;
+	private Label lblEarth = null;
 
-	private Text text63 = null;
+	private Text txtEarth = null;
 
-	private Label label71 = null;
+	private Text txtWater = null;
 
-	private Label label72 = null;
+	private Text txtFire = null;
 
-	private Label label8 = null;
+	private Text txtAir = null;
 
-	private Text text7 = null;
+	private Label lblWater = null;
 
-	private Text text8 = null;
+	private Label lblFire = null;
 
-	private Text text9 = null;
-
-	private Text text10 = null;
-
-	private Text text11 = null;
-
-	private Label label9 = null;
-
-	private Label label10 = null;
-
-	private Label label11 = null;
-
-	private Label label12 = null;
+	private Label lblAir = null;
 
 	private Section section1 = null;
 
 	private Composite composite1 = null;
 
 	private Section section2 = null;
+
+	private Label lblVoid = null;
+
+	private Text txtVoid = null;
+
+	private Text txtPointsSpent = null;
+
+	private Label lblVoidPointsSpent = null;
 
 	@Override
 	public void createPartControl(Composite parent) {
@@ -129,9 +131,9 @@ public class PlayerEditor extends EditorPart {
 	}
 
 	/**
-	 * This method initializes formToolkit	
-	 * 	
-	 * @return org.eclipse.ui.forms.widgets.FormToolkit	
+	 * This method initializes formToolkit
+	 * 
+	 * @return org.eclipse.ui.forms.widgets.FormToolkit
 	 */
 	private FormToolkit getFormToolkit() {
 		if (formToolkit == null) {
@@ -141,8 +143,8 @@ public class PlayerEditor extends EditorPart {
 	}
 
 	/**
-	 * This method initializes composite	
-	 *
+	 * This method initializes composite
+	 * 
 	 */
 	private void createComposite() {
 		GridLayout gridLayout = new GridLayout();
@@ -154,11 +156,25 @@ public class PlayerEditor extends EditorPart {
 		createSection();
 		composite.setLayout(gridLayout);
 		createSection1();
+
+		// DataBinding
+		Display display = Display.getDefault();
+		Realm.runWithDefault(SWTObservables.getRealm(display), new Runnable() {
+			public void run() {
+				DataBindingContext bindingContext = new DataBindingContext();
+				DataBindingHelper
+						.bindPojoOnEditor(
+								PlayerEditor.this,
+								((PlayerEditorInput) PlayerEditor.this
+										.getEditorInput()).getPlayerCharacter(),
+								bindingContext);
+			}
+		});
 	}
 
 	/**
-	 * This method initializes section	
-	 *
+	 * This method initializes section
+	 * 
 	 */
 	private void createSection() {
 		GridData gridData = new GridData();
@@ -180,49 +196,84 @@ public class PlayerEditor extends EditorPart {
 	}
 
 	/**
-	 * This method initializes compositeRing	
-	 *
+	 * This method initializes compositeRing
+	 * 
 	 */
 	private void createCompositeRing() {
+		GridData gridData25 = new GridData();
+		gridData25.grabExcessHorizontalSpace = true;
+		gridData25.horizontalAlignment = org.eclipse.swt.layout.GridData.FILL;
+		GridData gridData24 = new GridData();
+		gridData24.horizontalAlignment = org.eclipse.swt.layout.GridData.FILL;
+		gridData24.grabExcessHorizontalSpace = true;
+		GridData gridData23 = new GridData();
+		gridData23.horizontalAlignment = org.eclipse.swt.layout.GridData.FILL;
+		GridData gridData22 = new GridData();
+		gridData22.grabExcessHorizontalSpace = true;
+		gridData22.horizontalAlignment = org.eclipse.swt.layout.GridData.FILL;
+		GridData gridData21 = new GridData();
+		gridData21.grabExcessHorizontalSpace = true;
+		gridData21.horizontalAlignment = org.eclipse.swt.layout.GridData.FILL;
+		GridData gridData20 = new GridData();
+		gridData20.grabExcessHorizontalSpace = true;
+		gridData20.horizontalAlignment = org.eclipse.swt.layout.GridData.FILL;
+		GridData gridData19 = new GridData();
+		gridData19.grabExcessHorizontalSpace = true;
+		gridData19.horizontalAlignment = org.eclipse.swt.layout.GridData.FILL;
+		GridData gridData18 = new GridData();
+		gridData18.grabExcessHorizontalSpace = true;
+		gridData18.horizontalAlignment = org.eclipse.swt.layout.GridData.FILL;
+		GridData gridData17 = new GridData();
+		gridData17.grabExcessHorizontalSpace = true;
+		gridData17.horizontalAlignment = org.eclipse.swt.layout.GridData.FILL;
+		GridData gridData9 = new GridData();
+		gridData9.grabExcessHorizontalSpace = true;
+		gridData9.horizontalAlignment = org.eclipse.swt.layout.GridData.FILL;
 		GridData gridData15 = new GridData();
 		gridData15.verticalSpan = 2;
 		GridData gridData14 = new GridData();
 		gridData14.verticalSpan = 2;
+		gridData14.horizontalAlignment = org.eclipse.swt.layout.GridData.FILL;
+		gridData14.grabExcessHorizontalSpace = true;
 		GridData gridData13 = new GridData();
 		gridData13.verticalSpan = 2;
 		GridData gridData12 = new GridData();
 		gridData12.verticalSpan = 2;
+		gridData12.horizontalAlignment = org.eclipse.swt.layout.GridData.FILL;
+		gridData12.grabExcessHorizontalSpace = true;
 		GridData gridData11 = new GridData();
 		gridData11.verticalSpan = 2;
+		gridData11.horizontalAlignment = org.eclipse.swt.layout.GridData.FILL;
+		gridData11.grabExcessHorizontalSpace = true;
 		GridData gridData10 = new GridData();
 		gridData10.verticalSpan = 2;
-		GridData gridData9 = new GridData();
-		gridData9.verticalSpan = 2;
 		GridData gridData8 = new GridData();
 		gridData8.verticalSpan = 2;
 		GridData gridData7 = new GridData();
 		gridData7.verticalSpan = 2;
+		gridData7.horizontalAlignment = org.eclipse.swt.layout.GridData.FILL;
+		gridData7.grabExcessHorizontalSpace = true;
 		GridData gridData6 = new GridData();
 		gridData6.verticalSpan = 2;
 		GridData gridData5 = new GridData();
 		gridData5.heightHint = 2;
-		gridData5.horizontalSpan = 2;
+		gridData5.horizontalSpan = 4;
 		gridData5.horizontalAlignment = org.eclipse.swt.layout.GridData.FILL;
 		GridData gridData4 = new GridData();
-		gridData4.horizontalSpan = 2;
+		gridData4.horizontalSpan = 4;
 		gridData4.heightHint = 2;
 		gridData4.horizontalAlignment = org.eclipse.swt.layout.GridData.FILL;
 		GridData gridData3 = new GridData();
 		gridData3.horizontalAlignment = org.eclipse.swt.layout.GridData.FILL;
-		gridData3.horizontalSpan = 2;
+		gridData3.horizontalSpan = 4;
 		gridData3.heightHint = 2;
 		GridData gridData2 = new GridData();
-		gridData2.horizontalSpan = 2;
-		gridData2.grabExcessHorizontalSpace = true;
+		gridData2.horizontalSpan = 4;
+		gridData2.grabExcessHorizontalSpace = false;
 		gridData2.heightHint = 2;
 		gridData2.verticalAlignment = org.eclipse.swt.layout.GridData.CENTER;
 		gridData2.horizontalAlignment = org.eclipse.swt.layout.GridData.FILL;
-		gridData2.grabExcessVerticalSpace = true;
+		gridData2.grabExcessVerticalSpace = false;
 		GridData gridData1 = new GridData();
 		gridData1.horizontalSpan = 4;
 		gridData1.horizontalAlignment = org.eclipse.swt.layout.GridData.FILL;
@@ -231,69 +282,89 @@ public class PlayerEditor extends EditorPart {
 		gridLayout1.numColumns = 4;
 		compositeRing = getFormToolkit().createComposite(section);
 		compositeRing.setLayout(gridLayout1);
-		Composite separator = getFormToolkit().createCompositeSeparator(compositeRing);
+		Composite separator = getFormToolkit().createCompositeSeparator(
+				compositeRing);
 		separator.setLayoutData(gridData1);
-		label8 = getFormToolkit().createLabel(compositeRing, "Label");
-		label8.setLayoutData(gridData6);
-		text7 = getFormToolkit().createText(compositeRing, null, SWT.SINGLE | SWT.BORDER);
-		text7.setLayoutData(gridData7);
-		label1 = getFormToolkit().createLabel(compositeRing, "Label");
-		text1 = getFormToolkit().createText(compositeRing, null, SWT.SINGLE | SWT.BORDER);
-		label = getFormToolkit().createLabel(compositeRing, "Label");
-		text = getFormToolkit().createText(compositeRing, null, SWT.SINGLE | SWT.BORDER);
-		Composite separator1 = getFormToolkit().createCompositeSeparator(compositeRing);
+		lblEarth = getFormToolkit().createLabel(compositeRing, "earth");
+		lblEarth.setLayoutData(gridData6);
+		txtEarth = getFormToolkit().createText(compositeRing, null,
+				SWT.SINGLE | SWT.BORDER);
+		txtEarth.setLayoutData(gridData7);
+		lblStamina = getFormToolkit().createLabel(compositeRing, "Stamina");
+		txtStamina = getFormToolkit().createText(compositeRing, null,
+				SWT.SINGLE | SWT.BORDER);
+		txtStamina.setLayoutData(gridData9);
+		lblWillPower = getFormToolkit().createLabel(compositeRing, "WillPower");
+		txtWillPower = getFormToolkit().createText(compositeRing, null,
+				SWT.SINGLE | SWT.BORDER);
+		txtWillPower.setLayoutData(gridData17);
+		Composite separator1 = getFormToolkit().createCompositeSeparator(
+				compositeRing);
 		separator1.setLayoutData(gridData2);
-		Label filler11 = new Label(compositeRing, SWT.NONE);
-		Label filler24 = new Label(compositeRing, SWT.NONE);
-		label9 = getFormToolkit().createLabel(compositeRing, "Label");
-		label9.setLayoutData(gridData15);
-		text8 = getFormToolkit().createText(compositeRing, null, SWT.SINGLE | SWT.BORDER);
-		text8.setLayoutData(gridData14);
-		label2 = getFormToolkit().createLabel(compositeRing, "Label");
-		text2 = getFormToolkit().createText(compositeRing, null, SWT.SINGLE | SWT.BORDER);
-		label3 = getFormToolkit().createLabel(compositeRing, "Label");
-		text3 = getFormToolkit().createText(compositeRing, null, SWT.SINGLE | SWT.BORDER);
-		Composite separator2 = getFormToolkit().createCompositeSeparator(compositeRing);
+		lblWater = getFormToolkit().createLabel(compositeRing, "water");
+		lblWater.setLayoutData(gridData15);
+		txtWater = getFormToolkit().createText(compositeRing, null,
+				SWT.SINGLE | SWT.BORDER);
+		txtWater.setLayoutData(gridData14);
+		lblStrength = getFormToolkit().createLabel(compositeRing, "Strength");
+		txtStrength = getFormToolkit().createText(compositeRing, null,
+				SWT.SINGLE | SWT.BORDER);
+		txtStrength.setLayoutData(gridData18);
+		lblPerception = getFormToolkit().createLabel(compositeRing,
+				"Perception");
+		txtPerception = getFormToolkit().createText(compositeRing, null,
+				SWT.SINGLE | SWT.BORDER);
+		txtPerception.setLayoutData(gridData19);
+		Composite separator2 = getFormToolkit().createCompositeSeparator(
+				compositeRing);
 		separator2.setLayoutData(gridData3);
-		Label filler8 = new Label(compositeRing, SWT.NONE);
-		Label filler21 = new Label(compositeRing, SWT.NONE);
-		label10 = getFormToolkit().createLabel(compositeRing, "Label");
-		label10.setLayoutData(gridData13);
-		text9 = getFormToolkit().createText(compositeRing, null, SWT.SINGLE | SWT.BORDER);
-		text9.setLayoutData(gridData12);
-		label4 = getFormToolkit().createLabel(compositeRing, "Label");
-		text4 = getFormToolkit().createText(compositeRing, null, SWT.SINGLE | SWT.BORDER);
-		label5 = getFormToolkit().createLabel(compositeRing, "Label");
-		text5 = getFormToolkit().createText(compositeRing, null, SWT.SINGLE | SWT.BORDER);
-		Composite separator3 = getFormToolkit().createCompositeSeparator(compositeRing);
+		lblFire = getFormToolkit().createLabel(compositeRing, "Fire");
+		lblFire.setLayoutData(gridData13);
+		txtFire = getFormToolkit().createText(compositeRing, null,
+				SWT.SINGLE | SWT.BORDER);
+		txtFire.setLayoutData(gridData12);
+		lblAgility = getFormToolkit().createLabel(compositeRing, "Agility");
+		txtAgility = getFormToolkit().createText(compositeRing, null,
+				SWT.SINGLE | SWT.BORDER);
+		txtAgility.setLayoutData(gridData20);
+		lblIntelligence = getFormToolkit().createLabel(compositeRing,
+				"Intelligence");
+		txtIntelligence = getFormToolkit().createText(compositeRing, null,
+				SWT.SINGLE | SWT.BORDER);
+		txtIntelligence.setLayoutData(gridData23);
+		Composite separator3 = getFormToolkit().createCompositeSeparator(
+				compositeRing);
 		separator3.setLayoutData(gridData4);
-		Label filler5 = new Label(compositeRing, SWT.NONE);
-		Label filler18 = new Label(compositeRing, SWT.NONE);
-		label11 = getFormToolkit().createLabel(compositeRing, "Label");
-		label11.setLayoutData(gridData10);
-		text10 = getFormToolkit().createText(compositeRing, null, SWT.SINGLE | SWT.BORDER);
-		text10.setLayoutData(gridData11);
-		label6 = getFormToolkit().createLabel(compositeRing, "Label");
-		text61 = getFormToolkit().createText(compositeRing, null, SWT.SINGLE | SWT.BORDER);
-		label7 = getFormToolkit().createLabel(compositeRing, "Label");
-		text6 = getFormToolkit().createText(compositeRing, null, SWT.SINGLE | SWT.BORDER);
-		Composite separator4 = getFormToolkit().createCompositeSeparator(compositeRing);
+		lblAir = getFormToolkit().createLabel(compositeRing, "Air");
+		lblAir.setLayoutData(gridData10);
+		txtAir = getFormToolkit().createText(compositeRing, null,
+				SWT.SINGLE | SWT.BORDER);
+		txtAir.setLayoutData(gridData11);
+		lblReflexes = getFormToolkit().createLabel(compositeRing, "Reflexes");
+		txtReflexes = getFormToolkit().createText(compositeRing, null,
+				SWT.SINGLE | SWT.BORDER);
+		txtReflexes.setLayoutData(gridData21);
+		lblAwareness = getFormToolkit().createLabel(compositeRing, "Awareness");
+		txtAwareness = getFormToolkit().createText(compositeRing, null,
+				SWT.SINGLE | SWT.BORDER);
+		txtAwareness.setLayoutData(gridData22);
+		Composite separator4 = getFormToolkit().createCompositeSeparator(
+				compositeRing);
 		separator4.setLayoutData(gridData5);
-		Label filler2 = new Label(compositeRing, SWT.NONE);
-		Label filler15 = new Label(compositeRing, SWT.NONE);
-		label12 = getFormToolkit().createLabel(compositeRing, "Label");
-		label12.setLayoutData(gridData9);
-		text11 = getFormToolkit().createText(compositeRing, null, SWT.SINGLE | SWT.BORDER);
-		text11.setLayoutData(gridData8);
-		label71 = getFormToolkit().createLabel(compositeRing, "Label");
-		text62 = getFormToolkit().createText(compositeRing, null, SWT.SINGLE | SWT.BORDER);
-		label72 = getFormToolkit().createLabel(compositeRing, "Label");
-		text63 = getFormToolkit().createText(compositeRing, null, SWT.SINGLE | SWT.BORDER);
+		lblVoid = getFormToolkit().createLabel(compositeRing, "Void");
+		txtVoid = getFormToolkit().createText(compositeRing, null,
+				SWT.SINGLE | SWT.BORDER);
+		txtVoid.setLayoutData(gridData24);
+		lblVoidPointsSpent = getFormToolkit().createLabel(compositeRing,
+				"PointsSpent");
+		txtPointsSpent = getFormToolkit().createText(compositeRing, null,
+				SWT.SINGLE | SWT.BORDER);
+		txtPointsSpent.setLayoutData(gridData25);
 	}
 
 	/**
-	 * This method initializes section1	
-	 *
+	 * This method initializes section1
+	 * 
 	 */
 	private void createSection1() {
 		GridData gridData16 = new GridData();
@@ -312,8 +383,8 @@ public class PlayerEditor extends EditorPart {
 	}
 
 	/**
-	 * This method initializes composite1	
-	 *
+	 * This method initializes composite1
+	 * 
 	 */
 	private void createComposite1() {
 		composite1 = getFormToolkit().createComposite(section1);
@@ -321,8 +392,8 @@ public class PlayerEditor extends EditorPart {
 	}
 
 	/**
-	 * This method initializes section2	
-	 *
+	 * This method initializes section2
+	 * 
 	 */
 	private void createSection2() {
 		section2 = getFormToolkit().createSection(
@@ -333,23 +404,13 @@ public class PlayerEditor extends EditorPart {
 		section2.setText("Identité");
 	}
 
-	
 	public PlayerEditor() {
 	}
 
 	public void doSave(IProgressMonitor monitor) {
-		// Save not supported
 	}
 
 	public void doSaveAs() {
-		// Save As not supported
-	}
-
-	public void init(IEditorSite site, IEditorInput input)
-			throws PartInitException {
-		setSite(site);
-		setInput(input);
-		setPartName(getUser());
 	}
 
 	public boolean isDirty() {
@@ -357,7 +418,6 @@ public class PlayerEditor extends EditorPart {
 	}
 
 	public boolean isSaveAsAllowed() {
-		// Save As not supported
 		return false;
 	}
 
@@ -367,4 +427,115 @@ public class PlayerEditor extends EditorPart {
 
 	public void dispose() {
 	}
-}   //  @jve:decl-index=0:visual-constraint="10,10,482,400"
+
+	public void init(IEditorSite site, IEditorInput input)
+			throws PartInitException {
+		// POST-CONDITION
+		if (!(input instanceof PlayerEditorInput))
+			throw new PartInitException(
+					"Invalid Input: Must be PlayerEditorInput");
+
+		// initialisation des variables
+		setSite(site);
+		setInput(input);
+		setPartName(getUser());
+	}
+
+	/**
+	 * @return the txtAgility
+	 */
+	public Text getTxtAgility() {
+		return txtAgility;
+	}
+
+	/**
+	 * @return the txtAir
+	 */
+	public Text getTxtAir() {
+		return txtAir;
+	}
+
+	/**
+	 * @return the txtAwareness
+	 */
+	public Text getTxtAwareness() {
+		return txtAwareness;
+	}
+
+	/**
+	 * @return the txtEarth
+	 */
+	public Text getTxtEarth() {
+		return txtEarth;
+	}
+
+	/**
+	 * @return the txtFire
+	 */
+	public Text getTxtFire() {
+		return txtFire;
+	}
+
+	/**
+	 * @return the txtIntelligence
+	 */
+	public Text getTxtIntelligence() {
+		return txtIntelligence;
+	}
+
+	/**
+	 * @return the txtPerception
+	 */
+	public Text getTxtPerception() {
+		return txtPerception;
+	}
+
+	/**
+	 * @return the txtPointsSpent
+	 */
+	public Text getTxtPointsSpent() {
+		return txtPointsSpent;
+	}
+
+	/**
+	 * @return the txtReflexes
+	 */
+	public Text getTxtReflexes() {
+		return txtReflexes;
+	}
+
+	/**
+	 * @return the txtStamina
+	 */
+	public Text getTxtStamina() {
+		return txtStamina;
+	}
+
+	/**
+	 * @return the txtStrength
+	 */
+	public Text getTxtStrength() {
+		return txtStrength;
+	}
+
+	/**
+	 * @return the txtVoid
+	 */
+	public Text getTxtVoid() {
+		return txtVoid;
+	}
+
+	/**
+	 * @return the txtWater
+	 */
+	public Text getTxtWater() {
+		return txtWater;
+	}
+
+	/**
+	 * @return the txtWillPower
+	 */
+	public Text getTxtWillPower() {
+		return txtWillPower;
+	}
+} // @jve:decl-index=0:visual-constraint="10,10,482,400"

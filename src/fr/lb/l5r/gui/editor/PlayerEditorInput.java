@@ -8,12 +8,12 @@ import org.eclipse.ui.IPersistableElement;
 import fr.lb.l5r.business.entities.PersonnageJoueur;
 
 public class PlayerEditorInput implements IEditorInput {
-	private PersonnageJoueur personnageJoueur;
+	private PersonnageJoueur playerCharacter;
 
-	public PlayerEditorInput(PersonnageJoueur personnageJoueur) {
+	public PlayerEditorInput(PersonnageJoueur playerCharacter) {
 		super();
-		Assert.isNotNull(personnageJoueur);
-		this.personnageJoueur = personnageJoueur;
+		Assert.isNotNull(playerCharacter);
+		this.playerCharacter = playerCharacter;
 	}
 	
 	public boolean exists() {
@@ -21,11 +21,11 @@ public class PlayerEditorInput implements IEditorInput {
 	}
 	//FIXME:  Tooltip ne peut être null
 	public String getToolTipText() {
-		return "Player" + personnageJoueur.getName();
+		return "Player" + playerCharacter.getName();
 	}
 	//FIXME:  Tooltip ne peut être null
 	public String getName() {
-		return  "Player" + personnageJoueur.getName();
+		return  "Player" + playerCharacter.getName();
 	}
 	public ImageDescriptor getImageDescriptor() {
 		return null;
@@ -39,12 +39,26 @@ public class PlayerEditorInput implements IEditorInput {
 		if (!(obj instanceof PlayerEditorInput))
 			return false;
 		PlayerEditorInput other = (PlayerEditorInput) obj;
-		return this.personnageJoueur.equals(other.personnageJoueur);
+		return this.playerCharacter.equals(other.playerCharacter);
 	}
 	public int hashCode() {
-		return personnageJoueur.hashCode();
+		return playerCharacter.hashCode();
 	}
 	public Object getAdapter(Class adapter) {
 		return null;
+	}
+
+	/**
+	 * @return the playerCharacter
+	 */
+	public PersonnageJoueur getPlayerCharacter() {
+		return playerCharacter;
+	}
+
+	/**
+	 * @param playerCharacter the playerCharacter to set
+	 */
+	public void setPlayerCharacter(PersonnageJoueur playerCharacter) {
+		this.playerCharacter = playerCharacter;
 	}
 }
