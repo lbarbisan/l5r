@@ -36,6 +36,10 @@ import org.eclipse.ui.part.EditorPart;
 
 import fr.lb.l5r.gui.databindings.DataBindingHelper;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.swt.graphics.Font;
 
 /**
  * An editor that presents a chat with a specified participant.
@@ -102,10 +106,6 @@ public class PlayerEditor extends EditorPart {
 
 	private Label lblAir = null;
 
-	private Section section1 = null;
-
-	private Composite composite1 = null;
-
 	private Section section2 = null;
 
 	private Label lblVoid = null;
@@ -118,41 +118,29 @@ public class PlayerEditor extends EditorPart {
 
 	private Composite composite2 = null;
 
-	private Label label = null;
+	private Label lblName = null;
 
-	private Text text = null;
+	private Text txtName = null;
 
-	private Label label1 = null;
+	private Label lblClan = null;
 
-	private Label label2 = null;
+	private Label lblRank = null;
 
-	private Text text1 = null;
+	private Text txtClan = null;
 
-	private Text text2 = null;
+	private Text txtRank = null;
 
-	private Label label3 = null;
+	private Label lblSchool = null;
 
-	private Label label4 = null;
+	private Label lblInsight = null;
 
-	private Text text3 = null;
+	private Text txtSchool = null;
 
-	private Text text4 = null;
+	private Text txtInsight = null;
 
 	private Section section3 = null;
 
-	private Section section4 = null;
-
-	private Section section5 = null;
-
-	private Section section6 = null;
-
 	private Composite composite3 = null;
-
-	private Composite composite4 = null;
-
-	private Composite composite5 = null;
-
-	private Composite composite6 = null;
 
 	private Button checkBox = null;
 
@@ -174,72 +162,88 @@ public class PlayerEditor extends EditorPart {
 
 	private Button checkBox18 = null;
 
-	private Button checkBox2 = null;
+	private Text text5 = null;
 
-	private Button checkBox21 = null;
+	private Section section1 = null;
 
-	private Button checkBox22 = null;
+	private Table table = null;
 
-	private Button checkBox23 = null;
+	private Section section4 = null;
 
-	private Button checkBox24 = null;
+	private Table table1 = null;
 
-	private Button checkBox25 = null;
+	private Section section5 = null;
 
-	private Button checkBox26 = null;
+	private Composite composite1 = null;
 
-	private Button checkBox27 = null;
+	private Label label = null;
 
-	private Button checkBox28 = null;
+	private Text text = null;
 
-	private Button checkBox29 = null;
+	private Label label1 = null;
 
-	private Button checkBox3 = null;
+	private Text text1 = null;
 
-	private Button checkBox31 = null;
+	private Text text2 = null;
 
-	private Button checkBox32 = null;
+	private Label label2 = null;
 
-	private Button checkBox33 = null;
+	private Text text3 = null;
 
-	private Button checkBox34 = null;
+	private Label label3 = null;
 
-	private Button checkBox35 = null;
+	private Section section6 = null;
 
-	private Button checkBox36 = null;
+	private Composite composite4 = null;
 
-	private Button checkBox37 = null;
+	private Label label4 = null;
 
-	private Button checkBox38 = null;
+	private Label label5 = null;
 
-	private Button checkBox39 = null;
+	private Label label6 = null;
 
-	private Button checkBox4 = null;
+	private Text text4 = null;
 
-	private Button checkBox5 = null;
+	private Text text6 = null;
 
-	private Button checkBox51 = null;
+	private Text text7 = null;
 
-	private Button checkBox511 = null;
+	private Section section7 = null;
 
-	private Button checkBox5111 = null;
+	private Composite composite5 = null;
 
-	private Button checkBox51111 = null;
+	private Text text8 = null;
 
-	private Button checkBox511111 = null;
+	private Text text9 = null;
 
-	private Button checkBox5111111 = null;
+	private Label label7 = null;
 
-	private Button checkBox51111111 = null;
+	private Label label8 = null;
 
-	private Button checkBox51111112 = null;
+	private Section section8 = null;
+
+	private Composite composite6 = null;
+
+	private Text text10 = null;
+
+	private Text text11 = null;
+
+	private Label label9 = null;
+
+	private Label label10 = null;
+
+	private Section section9 = null;
+
+	private Table table2 = null;
+
+	private Composite composite7 = null;
 
 	@Override
 	public void createPartControl(Composite parent) {
 		// TODO Auto-generated method stub
 		top = new Composite(parent, SWT.NONE);
-		createComposite();
 		top.setLayout(new FillLayout());
+		createComposite();
 	}
 
 	@Override
@@ -267,14 +271,21 @@ public class PlayerEditor extends EditorPart {
 	private void createComposite() {
 		GridLayout gridLayout = new GridLayout();
 		gridLayout.makeColumnsEqualWidth = false;
-		gridLayout.numColumns = 2;
+		gridLayout.numColumns = 5;
 		composite = getFormToolkit().createComposite(top);
 		createSection2();
+		createComposite7();
+		createSection5();
+		createSection6();
+		createSection7();
+		createSection8();
+		Label filler1 = new Label(composite, SWT.NONE);
 		createSection();
-		composite.setLayout(gridLayout);
 		createSection1();
-
-		// DataBinding
+		createSection9();
+		composite.setLayout(gridLayout);
+		createSection4();
+		createSection3();
 		Display display = Display.getDefault();
 		Realm.runWithDefault(SWTObservables.getRealm(display), new Runnable() {
 			public void run() {
@@ -300,6 +311,7 @@ public class PlayerEditor extends EditorPart {
 		gridData.widthHint = -1;
 		gridData.horizontalAlignment = org.eclipse.swt.layout.GridData.FILL;
 		gridData.verticalAlignment = org.eclipse.swt.layout.GridData.FILL;
+		gridData.horizontalSpan = 2;
 		gridData.grabExcessVerticalSpace = true;
 		section = getFormToolkit().createSection(
 				composite,
@@ -307,6 +319,7 @@ public class PlayerEditor extends EditorPart {
 						| ExpandableComposite.TITLE_BAR);
 		section.setExpanded(true);
 		section.setText("Anneaux");
+		section.setFont(new Font(Display.getDefault(), "Tahoma", 8, SWT.BOLD));
 		section.setLayoutData(gridData);
 		createCompositeRing();
 		section.setClient(compositeRing);
@@ -477,39 +490,6 @@ public class PlayerEditor extends EditorPart {
 		txtVoidRingPointsSpent = getFormToolkit().createText(compositeRing, null,
 				SWT.SINGLE | SWT.BORDER);
 		txtVoidRingPointsSpent.setLayoutData(gridData25);
-		createSection3();
-		createSection4();
-		createSection5();
-		createSection6();
-	}
-
-	/**
-	 * This method initializes section1
-	 * 
-	 */
-	private void createSection1() {
-		GridData gridData16 = new GridData();
-		gridData16.grabExcessHorizontalSpace = true;
-		gridData16.horizontalAlignment = org.eclipse.swt.layout.GridData.FILL;
-		gridData16.verticalAlignment = org.eclipse.swt.layout.GridData.FILL;
-		gridData16.grabExcessVerticalSpace = true;
-		section1 = getFormToolkit().createSection(
-				composite,
-				ExpandableComposite.TWISTIE | Section.DESCRIPTION
-						| ExpandableComposite.TITLE_BAR);
-		section1.setExpanded(true);
-		createComposite1();
-		section1.setLayoutData(gridData16);
-		section1.setClient(composite1);
-	}
-
-	/**
-	 * This method initializes composite1
-	 * 
-	 */
-	private void createComposite1() {
-		composite1 = getFormToolkit().createComposite(section1);
-		composite1.setLayout(new GridLayout());
 	}
 
 	/**
@@ -520,7 +500,7 @@ public class PlayerEditor extends EditorPart {
 		GridData gridData26 = new GridData();
 		gridData26.horizontalAlignment = org.eclipse.swt.layout.GridData.FILL;
 		gridData26.grabExcessVerticalSpace = true;
-		gridData26.verticalAlignment = org.eclipse.swt.layout.GridData.FILL;
+		gridData26.verticalAlignment = org.eclipse.swt.layout.GridData.BEGINNING;
 		gridData26.horizontalSpan = 2;
 		gridData26.grabExcessHorizontalSpace = true;
 		section2 = getFormToolkit().createSection(
@@ -528,6 +508,7 @@ public class PlayerEditor extends EditorPart {
 				ExpandableComposite.TWISTIE | Section.DESCRIPTION
 						| ExpandableComposite.TITLE_BAR);
 		section2.setExpanded(true);
+		section2.setFont(new Font(Display.getDefault(), "Tahoma", 8, SWT.BOLD));
 		createComposite2();
 		section2.setText("Identité");
 		section2.setLayoutData(gridData26);
@@ -690,21 +671,21 @@ public class PlayerEditor extends EditorPart {
 		gridLayout2.numColumns = 4;
 		composite2 = getFormToolkit().createComposite(section2);
 		composite2.setLayout(gridLayout2);
-		label = getFormToolkit().createLabel(composite2, "Label");
-		text = getFormToolkit().createText(composite2, null, SWT.SINGLE | SWT.BORDER);
-		text.setLayoutData(gridData27);
-		label1 = getFormToolkit().createLabel(composite2, "Label");
-		text1 = getFormToolkit().createText(composite2, null, SWT.SINGLE | SWT.BORDER);
-		text1.setLayoutData(gridData28);
-		label3 = getFormToolkit().createLabel(composite2, "Label");
-		text3 = getFormToolkit().createText(composite2, null, SWT.SINGLE | SWT.BORDER);
-		text3.setLayoutData(gridData30);
-		label2 = getFormToolkit().createLabel(composite2, "Label");
-		text2 = getFormToolkit().createText(composite2, null, SWT.SINGLE | SWT.BORDER);
-		text2.setLayoutData(gridData29);
-		label4 = getFormToolkit().createLabel(composite2, "Label");
-		text4 = getFormToolkit().createText(composite2, null, SWT.SINGLE | SWT.BORDER);
-		text4.setLayoutData(gridData31);
+		lblName = getFormToolkit().createLabel(composite2, "Name");
+		txtName = getFormToolkit().createText(composite2, null, SWT.SINGLE | SWT.BORDER);
+		txtName.setLayoutData(gridData27);
+		lblClan = getFormToolkit().createLabel(composite2, "Clan");
+		txtClan = getFormToolkit().createText(composite2, null, SWT.SINGLE | SWT.BORDER);
+		txtClan.setLayoutData(gridData28);
+		lblSchool = getFormToolkit().createLabel(composite2, "School");
+		txtSchool = getFormToolkit().createText(composite2, null, SWT.SINGLE | SWT.BORDER);
+		txtSchool.setLayoutData(gridData30);
+		lblRank = getFormToolkit().createLabel(composite2, "Rank");
+		txtRank = getFormToolkit().createText(composite2, null, SWT.SINGLE | SWT.BORDER);
+		txtRank.setLayoutData(gridData29);
+		lblInsight = getFormToolkit().createLabel(composite2, "Insight");
+		txtInsight = getFormToolkit().createText(composite2, null, SWT.SINGLE | SWT.BORDER);
+		txtInsight.setLayoutData(gridData31);
 	}
 
 	/**
@@ -712,53 +693,17 @@ public class PlayerEditor extends EditorPart {
 	 *
 	 */
 	private void createSection3() {
-		GridData gridData33 = new GridData();
-		gridData33.horizontalAlignment = org.eclipse.swt.layout.GridData.CENTER;
-		gridData33.heightHint = -1;
-		gridData33.widthHint = -1;
-		section3 = getFormToolkit().createSection(compositeRing, ExpandableComposite.TWISTIE | ExpandableComposite.SHORT_TITLE_BAR);
+		GridData gridData32 = new GridData();
+		gridData32.horizontalAlignment = GridData.CENTER;
+		gridData32.widthHint = -1;
+		gridData32.heightHint = -1;
+		section3 = getFormToolkit().createSection(composite, ExpandableComposite.TWISTIE | ExpandableComposite.SHORT_TITLE_BAR);
 		section3.setExpanded(true);
 		section3.setText("Gloire");
-		section3.setLayoutData(gridData33);
+		section3.setFont(new Font(Display.getDefault(), "Tahoma", 8, SWT.BOLD));
 		createComposite3();
+		section3.setLayoutData(gridData32);
 		section3.setClient(composite3);
-	}
-
-	/**
-	 * This method initializes section4	
-	 *
-	 */
-	private void createSection4() {
-		section4 = getFormToolkit().createSection(compositeRing, ExpandableComposite.TWISTIE | Section.DESCRIPTION | ExpandableComposite.TITLE_BAR);
-		section4.setExpanded(true);
-		createComposite4();
-		section4.setClient(composite4);
-	}
-
-	/**
-	 * This method initializes section5	
-	 *
-	 */
-	private void createSection5() {
-		section5 = getFormToolkit().createSection(compositeRing, ExpandableComposite.TWISTIE | Section.DESCRIPTION | ExpandableComposite.TITLE_BAR);
-		section5.setExpanded(true);
-		createComposite5();
-		section5.setClient(composite5);
-	}
-
-	/**
-	 * This method initializes section6	
-	 *
-	 */
-	private void createSection6() {
-		GridData gridData32 = new GridData();
-		gridData32.horizontalAlignment = org.eclipse.swt.layout.GridData.BEGINNING;
-		gridData32.verticalAlignment = org.eclipse.swt.layout.GridData.BEGINNING;
-		section6 = getFormToolkit().createSection(compositeRing, ExpandableComposite.TWISTIE | Section.DESCRIPTION | ExpandableComposite.TITLE_BAR);
-		section6.setExpanded(true);
-		createComposite6();
-		section6.setLayoutData(gridData32);
-		section6.setClient(composite6);
 	}
 
 	/**
@@ -766,6 +711,10 @@ public class PlayerEditor extends EditorPart {
 	 *
 	 */
 	private void createComposite3() {
+		GridData gridData44 = new GridData();
+		gridData44.horizontalSpan = 5;
+		gridData44.grabExcessHorizontalSpace = true;
+		gridData44.horizontalAlignment = org.eclipse.swt.layout.GridData.FILL;
 		GridData gridData43 = new GridData();
 		gridData43.horizontalAlignment = org.eclipse.swt.layout.GridData.CENTER;
 		GridData gridData42 = new GridData();
@@ -786,6 +735,7 @@ public class PlayerEditor extends EditorPart {
 		gridData35.horizontalAlignment = org.eclipse.swt.layout.GridData.CENTER;
 		GridData gridData34 = new GridData();
 		gridData34.horizontalAlignment = org.eclipse.swt.layout.GridData.CENTER;
+		gridData34.grabExcessHorizontalSpace = false;
 		GridLayout gridLayout3 = new GridLayout();
 		gridLayout3.numColumns = 5;
 		gridLayout3.marginHeight = 0;
@@ -795,6 +745,8 @@ public class PlayerEditor extends EditorPart {
 		gridLayout3.horizontalSpacing = 1;
 		composite3 = getFormToolkit().createComposite(section3);
 		composite3.setLayout(gridLayout3);
+		text5 = getFormToolkit().createText(composite3, null, SWT.SINGLE | SWT.BORDER);
+		text5.setLayoutData(gridData44);
 		checkBox = getFormToolkit().createButton(composite3, null, SWT.CHECK);
 		checkBox.setLayoutData(gridData42);
 		checkBox1 = getFormToolkit().createButton(composite3, null, SWT.CHECK);
@@ -818,24 +770,142 @@ public class PlayerEditor extends EditorPart {
 	}
 
 	/**
+	 * This method initializes section1	
+	 *
+	 */
+	private void createSection1() {
+		GridData gridData16 = new GridData();
+		gridData16.horizontalAlignment = org.eclipse.swt.layout.GridData.FILL;
+		gridData16.horizontalSpan = 3;
+		gridData16.verticalAlignment = org.eclipse.swt.layout.GridData.BEGINNING;
+		section1 = getFormToolkit().createSection(composite, ExpandableComposite.TWISTIE | Section.DESCRIPTION | ExpandableComposite.TITLE_BAR);
+		section1.setExpanded(true);
+		section1.setFont(new Font(Display.getDefault(), "Tahoma", 8, SWT.BOLD));
+		section1.setLayoutData(gridData16);
+		section1.setText("Skills");
+		table = getFormToolkit().createTable(section1, SWT.NONE);
+		table.setHeaderVisible(true);
+		table.setLinesVisible(true);
+		TableColumn tableColumn = new TableColumn(table, SWT.NONE);
+		tableColumn.setWidth(140);
+		tableColumn.setText("SkillName");
+		TableColumn tableColumn1 = new TableColumn(table, SWT.NONE);
+		tableColumn1.setWidth(140);
+		tableColumn1.setText("SkillEmphasis");
+		TableColumn tableColumn2 = new TableColumn(table, SWT.NONE);
+		tableColumn2.setWidth(60);
+		tableColumn2.setText("SkillRank");
+		TableColumn tableColumn3 = new TableColumn(table, SWT.NONE);
+		tableColumn3.setWidth(20);
+		section1.setClient(table);
+	}
+
+	/**
+	 * This method initializes section4	
+	 *
+	 */
+	private void createSection4() {
+		GridData gridData33 = new GridData();
+		gridData33.horizontalAlignment = org.eclipse.swt.layout.GridData.FILL;
+		gridData33.horizontalSpan = 3;
+		gridData33.verticalAlignment = org.eclipse.swt.layout.GridData.BEGINNING;
+		section4 = getFormToolkit().createSection(composite, ExpandableComposite.TWISTIE | Section.DESCRIPTION | ExpandableComposite.TITLE_BAR);
+		section4.setExpanded(true);
+		section4.setFont(new Font(Display.getDefault(), "Tahoma", 8, SWT.BOLD));
+		section4.setLayoutData(gridData33);
+		section4.setText("Mastery Ability");
+		table1 = getFormToolkit().createTable(section4, SWT.NONE);
+		table1.setHeaderVisible(true);
+		table1.setLinesVisible(true);
+		TableColumn tableColumn4 = new TableColumn(table1, SWT.NONE);
+		tableColumn4.setWidth(200);
+		tableColumn4.setText("Description");
+		section4.setClient(table1);
+	}
+
+	/**
+	 * This method initializes section5	
+	 *
+	 */
+	private void createSection5() {
+		GridData gridData48 = new GridData();
+		gridData48.verticalAlignment = org.eclipse.swt.layout.GridData.BEGINNING;
+		gridData48.verticalSpan = 2;
+		gridData48.horizontalAlignment = org.eclipse.swt.layout.GridData.END;
+		section5 = getFormToolkit().createSection(composite, ExpandableComposite.TWISTIE | Section.DESCRIPTION | ExpandableComposite.TITLE_BAR);
+		section5.setExpanded(true);
+		section5.setText("Primary Weapon");
+		createComposite1();
+		section5.setLayoutData(gridData48);
+		section5.setClient(composite1);
+	}
+
+	/**
+	 * This method initializes composite1	
+	 *
+	 */
+	private void createComposite1() {
+		GridLayout gridLayout4 = new GridLayout();
+		gridLayout4.numColumns = 2;
+		composite1 = getFormToolkit().createComposite(section5);
+		composite1.setLayout(gridLayout4);
+		label = getFormToolkit().createLabel(composite1, "Label");
+		text = getFormToolkit().createText(composite1, null, SWT.SINGLE | SWT.BORDER);
+		label1 = getFormToolkit().createLabel(composite1, "Label");
+		text1 = getFormToolkit().createText(composite1, null, SWT.SINGLE | SWT.BORDER);
+		label2 = getFormToolkit().createLabel(composite1, "Label");
+		text2 = getFormToolkit().createText(composite1, null, SWT.SINGLE | SWT.BORDER);
+		label3 = getFormToolkit().createLabel(composite1, "Label");
+		text3 = getFormToolkit().createText(composite1, null, SWT.SINGLE | SWT.BORDER);
+	}
+
+	/**
+	 * This method initializes section6	
+	 *
+	 */
+	private void createSection6() {
+		GridData gridData49 = new GridData();
+		gridData49.verticalAlignment = org.eclipse.swt.layout.GridData.BEGINNING;
+		gridData49.verticalSpan = 2;
+		gridData49.horizontalAlignment = org.eclipse.swt.layout.GridData.END;
+		section6 = getFormToolkit().createSection(composite, ExpandableComposite.TWISTIE | Section.DESCRIPTION | ExpandableComposite.TITLE_BAR);
+		section6.setExpanded(true);
+		section6.setText("Armor");
+		createComposite4();
+		section6.setLayoutData(gridData49);
+		section6.setClient(composite4);
+	}
+
+	/**
 	 * This method initializes composite4	
 	 *
 	 */
 	private void createComposite4() {
-		GridLayout gridLayout4 = new GridLayout();
-		gridLayout4.numColumns = 5;
-		composite4 = getFormToolkit().createComposite(section4);
-		composite4.setLayout(gridLayout4);
-		checkBox2 = getFormToolkit().createButton(composite4, null, SWT.CHECK);
-		checkBox21 = getFormToolkit().createButton(composite4, null, SWT.CHECK);
-		checkBox22 = getFormToolkit().createButton(composite4, null, SWT.CHECK);
-		checkBox23 = getFormToolkit().createButton(composite4, null, SWT.CHECK);
-		checkBox24 = getFormToolkit().createButton(composite4, null, SWT.CHECK);
-		checkBox25 = getFormToolkit().createButton(composite4, null, SWT.CHECK);
-		checkBox26 = getFormToolkit().createButton(composite4, null, SWT.CHECK);
-		checkBox27 = getFormToolkit().createButton(composite4, null, SWT.CHECK);
-		checkBox28 = getFormToolkit().createButton(composite4, null, SWT.CHECK);
-		checkBox29 = getFormToolkit().createButton(composite4, null, SWT.CHECK);
+		GridLayout gridLayout5 = new GridLayout();
+		gridLayout5.numColumns = 2;
+		composite4 = getFormToolkit().createComposite(section6);
+		composite4.setLayout(gridLayout5);
+		label4 = getFormToolkit().createLabel(composite4, "Label");
+		text4 = getFormToolkit().createText(composite4, null, SWT.SINGLE | SWT.BORDER);
+		label5 = getFormToolkit().createLabel(composite4, "Label");
+		text6 = getFormToolkit().createText(composite4, null, SWT.SINGLE | SWT.BORDER);
+		label6 = getFormToolkit().createLabel(composite4, "Label");
+		text7 = getFormToolkit().createText(composite4, null, SWT.SINGLE | SWT.BORDER);
+	}
+
+	/**
+	 * This method initializes section7	
+	 *
+	 */
+	private void createSection7() {
+		GridData gridData47 = new GridData();
+		gridData47.verticalAlignment = org.eclipse.swt.layout.GridData.BEGINNING;
+		section7 = getFormToolkit().createSection(composite, ExpandableComposite.TWISTIE | Section.DESCRIPTION | ExpandableComposite.TITLE_BAR);
+		section7.setExpanded(true);
+		section7.setText("TNToBeHit");
+		createComposite5();
+		section7.setLayoutData(gridData47);
+		section7.setClient(composite5);
 	}
 
 	/**
@@ -843,20 +913,30 @@ public class PlayerEditor extends EditorPart {
 	 *
 	 */
 	private void createComposite5() {
-		GridLayout gridLayout5 = new GridLayout();
-		gridLayout5.numColumns = 5;
-		composite5 = getFormToolkit().createComposite(section5);
-		composite5.setLayout(gridLayout5);
-		checkBox3 = getFormToolkit().createButton(composite5, null, SWT.CHECK);
-		checkBox31 = getFormToolkit().createButton(composite5, null, SWT.CHECK);
-		checkBox32 = getFormToolkit().createButton(composite5, null, SWT.CHECK);
-		checkBox33 = getFormToolkit().createButton(composite5, null, SWT.CHECK);
-		checkBox34 = getFormToolkit().createButton(composite5, null, SWT.CHECK);
-		checkBox35 = getFormToolkit().createButton(composite5, null, SWT.CHECK);
-		checkBox36 = getFormToolkit().createButton(composite5, null, SWT.CHECK);
-		checkBox37 = getFormToolkit().createButton(composite5, null, SWT.CHECK);
-		checkBox38 = getFormToolkit().createButton(composite5, null, SWT.CHECK);
-		checkBox39 = getFormToolkit().createButton(composite5, null, SWT.CHECK);
+		GridLayout gridLayout6 = new GridLayout();
+		gridLayout6.numColumns = 2;
+		composite5 = getFormToolkit().createComposite(section7);
+		composite5.setLayout(gridLayout6);
+		label7 = getFormToolkit().createLabel(composite5, "Label");
+		text8 = getFormToolkit().createText(composite5, null, SWT.SINGLE | SWT.BORDER);
+		label8 = getFormToolkit().createLabel(composite5, "Label");
+		text9 = getFormToolkit().createText(composite5, null, SWT.SINGLE | SWT.BORDER);
+	}
+
+	/**
+	 * This method initializes section8	
+	 *
+	 */
+	private void createSection8() {
+		GridData gridData46 = new GridData();
+		gridData46.verticalAlignment = org.eclipse.swt.layout.GridData.BEGINNING;
+		gridData46.horizontalAlignment = org.eclipse.swt.layout.GridData.END;
+		section8 = getFormToolkit().createSection(composite, ExpandableComposite.TWISTIE | Section.DESCRIPTION | ExpandableComposite.TITLE_BAR);
+		section8.setExpanded(true);
+		createComposite6();
+		section8.setText("Initiative");
+		section8.setLayoutData(gridData46);
+		section8.setClient(composite6);
 	}
 
 	/**
@@ -864,19 +944,54 @@ public class PlayerEditor extends EditorPart {
 	 *
 	 */
 	private void createComposite6() {
-		GridLayout gridLayout6 = new GridLayout();
-		gridLayout6.numColumns = 5;
-		composite6 = getFormToolkit().createComposite(section6);
-		composite6.setLayout(gridLayout6);
-		checkBox4 = getFormToolkit().createButton(composite6, null, SWT.CHECK);
-		checkBox5 = getFormToolkit().createButton(composite6, null, SWT.CHECK);
-		checkBox51 = getFormToolkit().createButton(composite6, null, SWT.CHECK);
-		checkBox511 = getFormToolkit().createButton(composite6, null, SWT.CHECK);
-		checkBox5111 = getFormToolkit().createButton(composite6, null, SWT.CHECK);
-		checkBox51111 = getFormToolkit().createButton(composite6, null, SWT.CHECK);
-		checkBox511111 = getFormToolkit().createButton(composite6, null, SWT.CHECK);
-		checkBox5111111 = getFormToolkit().createButton(composite6, null, SWT.CHECK);
-		checkBox51111111 = getFormToolkit().createButton(composite6, null, SWT.CHECK);
-		checkBox51111112 = getFormToolkit().createButton(composite6, null, SWT.CHECK);
+		GridLayout gridLayout7 = new GridLayout();
+		gridLayout7.numColumns = 2;
+		composite6 = getFormToolkit().createComposite(section8);
+		composite6.setLayout(gridLayout7);
+		label9 = getFormToolkit().createLabel(composite6, "Label");
+		text10 = getFormToolkit().createText(composite6, null, SWT.SINGLE | SWT.BORDER);
+		label10 = getFormToolkit().createLabel(composite6, "Label");
+		text11 = getFormToolkit().createText(composite6, null, SWT.SINGLE | SWT.BORDER);
+	}
+
+	/**
+	 * This method initializes section9	
+	 *
+	 */
+	private void createSection9() {
+		GridData gridData45 = new GridData();
+		gridData45.horizontalAlignment = org.eclipse.swt.layout.GridData.FILL;
+		gridData45.horizontalSpan = 2;
+		gridData45.verticalSpan = 2;
+		gridData45.verticalAlignment = org.eclipse.swt.layout.GridData.FILL;
+		section9 = getFormToolkit().createSection(composite, ExpandableComposite.TWISTIE | Section.DESCRIPTION | ExpandableComposite.TITLE_BAR);
+		section9.setExpanded(true);
+		section9.setText("Wounds");
+		section9.setLayoutData(gridData45);
+		table2 = new Table(section9, SWT.NONE);
+		table2.setHeaderVisible(true);
+		table2.setLinesVisible(true);
+		TableColumn tableColumn5 = new TableColumn(table2, SWT.NONE);
+		tableColumn5.setWidth(60);
+		tableColumn5.setText("Wounds");
+		TableColumn tableColumn6 = new TableColumn(table2, SWT.NONE);
+		tableColumn6.setWidth(60);
+		tableColumn6.setText("Total");
+		TableColumn tableColumn7 = new TableColumn(table2, SWT.NONE);
+		tableColumn7.setWidth(60);
+		tableColumn7.setText("Current");
+		section9.setClient(table2);
+	}
+
+	/**
+	 * This method initializes composite7	
+	 *
+	 */
+	private void createComposite7() {
+		GridData gridData50 = new GridData();
+		gridData50.grabExcessHorizontalSpace = true;
+		composite7 = getFormToolkit().createComposite(composite);
+		composite7.setLayout(new GridLayout());
+		composite7.setLayoutData(gridData50);
 	}
 }  //  @jve:decl-index=0:visual-constraint="10,10,727,546"
