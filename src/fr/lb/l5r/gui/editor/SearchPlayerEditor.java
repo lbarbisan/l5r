@@ -157,9 +157,9 @@ public class SearchPlayerEditor extends EditorPart {
 	public void init(IEditorSite site, IEditorInput input)
 			throws PartInitException {
 		// POST-CONDITION
-		if (!(input instanceof PlayerEditorInput))
+		if (!(input instanceof SearchPlayerEditorInput))
 			throw new PartInitException(
-					"Invalid Input: Must be PlayerEditorInput");
+					"Invalid Input: Must be SearchEditorInput");
 
 		// initialisation des variables
 		setSite(site);
@@ -224,5 +224,26 @@ public class SearchPlayerEditor extends EditorPart {
 		composite1 = new Composite(group, SWT.NONE);
 		composite1.setLayout(new GridLayout());
 		composite1.setLayoutData(gridData2);
+	}
+
+	/**
+	 * @return the txtClan
+	 */
+	public Text getTxtClan() {
+		return txtClan;
+	}
+
+	/**
+	 * @return the txtName
+	 */
+	public Text getTxtName() {
+		return txtName;
+	}
+
+	/**
+	 * @return the txtSchool
+	 */
+	public Text getTxtSchool() {
+		return txtSchool;
 	}
 }  //  @jve:decl-index=0:visual-constraint="10,10,727,546"
