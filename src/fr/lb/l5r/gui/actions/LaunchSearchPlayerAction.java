@@ -28,7 +28,7 @@ public class LaunchSearchPlayerAction extends Action implements IWorkbenchAction
 	public LaunchSearchPlayerAction(IWorkbenchWindow window) {
 		this.window = window;
 		setId(ID);
-		setText("&Rechercher un personnage...");
+		setText("&Lancer la recherche...");
 		setToolTipText("Permet de retrouver la liste des PJ/PNJ existant.");
 	}
 

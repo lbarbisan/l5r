@@ -35,6 +35,8 @@ import org.eclipse.ui.forms.widgets.Section;
 import org.eclipse.ui.part.EditorPart;
 
 import fr.lb.l5r.gui.databindings.DataBindingHelper;
+import fr.lb.l5r.gui.search.SearchField;
+
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.jface.viewers.TableViewer;
@@ -42,6 +44,8 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.custom.CBanner;
+
+import com.sun.corba.se.spi.orbutil.fsm.Input;
 
 /**
  * An editor that presents a chat with a specified participant.
@@ -212,6 +216,12 @@ public class SearchPlayerEditor extends EditorPart {
 		createComposite1();
 		button = new Button(group, SWT.NONE);
 		button.setText("Search");
+		button.addMouseListener(new org.eclipse.swt.events.MouseAdapter() {
+			public void mouseUp(org.eclipse.swt.events.MouseEvent e) {
+				//SearchPlayerEditor.this.get
+				System.out.println("mouseUp()"); // TODO Auto-generated Event stub mouseUp()
+			}
+		});
 	}
 
 	/**
@@ -229,6 +239,7 @@ public class SearchPlayerEditor extends EditorPart {
 	/**
 	 * @return the txtClan
 	 */
+	@SearchField
 	public Text getTxtClan() {
 		return txtClan;
 	}
@@ -236,6 +247,7 @@ public class SearchPlayerEditor extends EditorPart {
 	/**
 	 * @return the txtName
 	 */
+	@SearchField
 	public Text getTxtName() {
 		return txtName;
 	}
@@ -243,6 +255,7 @@ public class SearchPlayerEditor extends EditorPart {
 	/**
 	 * @return the txtSchool
 	 */
+	@SearchField
 	public Text getTxtSchool() {
 		return txtSchool;
 	}

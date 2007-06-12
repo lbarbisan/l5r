@@ -6,26 +6,27 @@ import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IPersistableElement;
 
 import fr.lb.l5r.business.entities.PersonnageJoueur;
+import fr.lb.l5r.business.entities.interfaces.IEntity;
 
 public class SearchPlayerEditorInput implements IEditorInput {
-	private PersonnageJoueur playerCharacter;
 
-	public SearchPlayerEditorInput(PersonnageJoueur playerCharacter) {
+	private IEntity entity;
+	
+	public SearchPlayerEditorInput(IEntity entity) {
 		super();
-		Assert.isNotNull(playerCharacter);
-		this.playerCharacter = playerCharacter;
+		Assert.isNotNull(entity);
+		this.entity = entity;
 	}
 	
+		
 	public boolean exists() {
 		return false;
 	}
-	//FIXME:  Tooltip ne peut être null
 	public String getToolTipText() {
-		return "Player" + playerCharacter.getName();
+		return "Permet d'effecter une recherche pour trouver un PJ";
 	}
-	//FIXME:  Tooltip ne peut être null
 	public String getName() {
-		return  "Player" + playerCharacter.getName();
+		return  "Search";
 	}
 	public ImageDescriptor getImageDescriptor() {
 		return null;
@@ -33,32 +34,7 @@ public class SearchPlayerEditorInput implements IEditorInput {
 	public IPersistableElement getPersistable() {
 		return null;
 	}
-	public boolean equals(Object obj) {
-		if (super.equals(obj))
-			return true;
-		if (!(obj instanceof SearchPlayerEditorInput))
-			return false;
-		SearchPlayerEditorInput other = (SearchPlayerEditorInput) obj;
-		return this.playerCharacter.equals(other.playerCharacter);
-	}
-	public int hashCode() {
-		return playerCharacter.hashCode();
-	}
 	public Object getAdapter(Class adapter) {
 		return null;
-	}
-
-	/**
-	 * @return the playerCharacter
-	 */
-	public PersonnageJoueur getPlayerCharacter() {
-		return playerCharacter;
-	}
-
-	/**
-	 * @param playerCharacter the playerCharacter to set
-	 */
-	public void setPlayerCharacter(PersonnageJoueur playerCharacter) {
-		this.playerCharacter = playerCharacter;
 	}
 }

@@ -525,7 +525,7 @@ public class PlayerEditor extends EditorPart {
 	}
 
 	public boolean isDirty() {
-		return false;
+		return true;
 	}
 
 	public boolean isSaveAsAllowed() {
