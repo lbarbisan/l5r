@@ -3,7 +3,6 @@ package fr.lb.l5r.business.beans;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -107,5 +106,10 @@ public class EntityBean implements IEntityLocal {
 			logger.debug("Search for " + queryString);
 		}
 		return query.getResultList();
+	}
+	
+	public void save(IEntity entity)
+	{
+		em.persist(entity);
 	}
 }

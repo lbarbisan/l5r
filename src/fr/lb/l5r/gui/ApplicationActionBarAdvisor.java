@@ -17,6 +17,7 @@ import org.eclipse.ui.application.ActionBarAdvisor;
 import org.eclipse.ui.application.IActionBarConfigurer;
 
 import fr.lb.l5r.gui.actions.CreatePlayerAction;
+import fr.lb.l5r.gui.actions.OpenSearchPlayerAction;
 
 
 
@@ -38,6 +39,7 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
     private IWorkbenchAction exitAction;
     private IWorkbenchAction aboutAction;
     private IWorkbenchAction createPlayerAction;
+    private IWorkbenchAction searchPlayerAction;
     
 
     public ApplicationActionBarAdvisor(IActionBarConfigurer configurer) {
@@ -56,6 +58,8 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
         register(aboutAction);
         createPlayerAction = new CreatePlayerAction(window);
         register(createPlayerAction);
+        searchPlayerAction = new OpenSearchPlayerAction(window);
+        
     }
     
     protected void fillMenuBar(IMenuManager menuBar) {
@@ -81,6 +85,7 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
         fileMenu.add(exitAction);
         // Player
         playerMenu.add(createPlayerAction);
+        playerMenu.add(searchPlayerAction);
         // Help
         helpMenu.add(aboutAction);
     }

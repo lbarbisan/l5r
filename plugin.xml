@@ -30,6 +30,12 @@
             icon="icons/sample.gif"
             id="l5rgui.editor.PlayerEditor"
             name="Player"/>
+      <editor
+            class="fr.lb.l5r.gui.editor.SearchPlayerEditor"
+            default="false"
+            icon="icons/sample.gif"
+            id="l5rgui.editor.SearchPlayerEditor"
+            name="SearchPlayer"/>
    </extension>
 
 </plugin>

@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.eclipse.swt.widgets.Text;
 
 /**
  * Cette classe retrouve les annotations d'une class de type editor
@@ -34,7 +35,8 @@ public class SearchHelper {
 				SearchField annotation = method.getAnnotation(SearchField.class);
 				if(annotation!=null)
 				{
-						fields.put(getFieldNameForMethod(method), method.invoke(editorPart, null));
+					Text text = (Text) method.invoke(editorPart, null);	
+					fields.put(getFieldNameForMethod(method), text.getText());
 				}
 			}
 		

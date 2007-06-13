@@ -10,12 +10,14 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.actions.ActionFactory.IWorkbenchAction;
 
 import fr.lb.l5r.business.Configuration;
+import fr.lb.l5r.business.beans.EntityBean;
 import fr.lb.l5r.business.beans.interfaces.IEntityLocal;
 import fr.lb.l5r.business.entities.PersonnageJoueur;
 import fr.lb.l5r.business.entities.interfaces.IEntity;
 import fr.lb.l5r.gui.editor.PlayerEditor;
-import fr.lb.l5r.gui.editor.PlayerEditorInput;
 import fr.lb.l5r.gui.editor.SearchPlayerEditor;
+import fr.lb.l5r.gui.editor.input.PlayerEditorInput;
+import fr.lb.l5r.gui.editor.input.SearchPlayerEditorInput;
 
 public class OpenSearchPlayerAction extends Action implements IWorkbenchAction {
 
@@ -37,8 +39,7 @@ public class OpenSearchPlayerAction extends Action implements IWorkbenchAction {
 			IWorkbenchPage page = window.getActivePage();
 			InitialContext context =  Configuration.getInstance().getContext();
 			IEntityLocal local = (IEntityLocal) context.lookup("EntityBean/local");
-			PersonnageJoueur player = (PersonnageJoueur) local.create(PersonnageJoueur.class);
-			PlayerEditorInput input = new PlayerEditorInput(player);
+			SearchPlayerEditorInput input = new SearchPlayerEditorInput(local);
 			page.openEditor(input, SearchPlayerEditor.ID);
 		} catch (PartInitException e) {
 			logger.error(e);

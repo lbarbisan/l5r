@@ -35,6 +35,8 @@ import org.eclipse.ui.forms.widgets.Section;
 import org.eclipse.ui.part.EditorPart;
 
 import fr.lb.l5r.gui.databindings.DataBindingHelper;
+import fr.lb.l5r.gui.editor.input.PlayerEditorInput;
+
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.jface.viewers.TableViewer;
@@ -519,6 +521,7 @@ public class PlayerEditor extends EditorPart {
 	}
 
 	public void doSave(IProgressMonitor monitor) {
+		((PlayerEditorInput) getEditorInput()).save();
 	}
 
 	public void doSaveAs() {
@@ -529,7 +532,7 @@ public class PlayerEditor extends EditorPart {
 	}
 
 	public boolean isSaveAsAllowed() {
-		return false;
+		return true;
 	}
 
 	private String getUser() {

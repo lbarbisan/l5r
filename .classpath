@@ -2,7 +2,11 @@
 <classpath>
 	<classpathentry path="src" kind="src"/>
 	<classpathentry path="test" kind="src"/>
-	<classpathentry path="conf/" exported="true" kind="lib"/>
+	<classpathentry path="conf/" exported="true" kind="lib">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="G:/Program Files/eclipse/configuration/org.eclipse.osgi/bundles/79/1/.cp"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry path="org.eclipse.jdt.launching.JRE_CONTAINER" exported="true" kind="con"/>
 	<classpathentry path="org.eclipse.pde.core.requiredPlugins" exported="true" kind="con"/>
 	<classpathentry path="lib/hibernate-all.jar" exported="true" kind="lib"/>
@@ -10,7 +14,6 @@
 	<classpathentry path="lib/jcainflow.jar" exported="true" kind="lib"/>
 	<classpathentry path="lib/jms-ra.jar" exported="true" kind="lib"/>
 	<classpathentry path="lib/thirdparty-all.jar" exported="true" kind="lib"/>
-	<classpathentry path="lib/log4j-1.2.14.jar" exported="true" kind="lib"/>
 	<classpathentry path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4" kind="con"/>
 	<classpathentry path="classes" kind="output"/>
 </classpath>

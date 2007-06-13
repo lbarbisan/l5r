@@ -14,7 +14,7 @@ import fr.lb.l5r.business.beans.interfaces.IEntityLocal;
 import fr.lb.l5r.business.entities.PersonnageJoueur;
 import fr.lb.l5r.business.entities.interfaces.IEntity;
 import fr.lb.l5r.gui.editor.PlayerEditor;
-import fr.lb.l5r.gui.editor.PlayerEditorInput;
+import fr.lb.l5r.gui.editor.input.PlayerEditorInput;
 
 public class CreatePlayerAction extends Action implements IWorkbenchAction {
 

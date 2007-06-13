@@ -1,10 +1,15 @@
-package fr.lb.l5r.gui.editor;
+package fr.lb.l5r.gui.editor.input;
+
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.util.Assert;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IPersistableElement;
 
+import fr.lb.l5r.business.Configuration;
+import fr.lb.l5r.business.beans.interfaces.IEntityLocal;
 import fr.lb.l5r.business.entities.PersonnageJoueur;
 
 public class PlayerEditorInput implements IEditorInput {
@@ -61,4 +66,20 @@ public class PlayerEditorInput implements IEditorInput {
 	public void setPlayerCharacter(PersonnageJoueur playerCharacter) {
 		this.playerCharacter = playerCharacter;
 	}
+	
+	
+	public void save()
+	{
+		InitialContext context =  Configuration.getInstance().getContext();
+		IEntityLocal local;
+		try {
+			local = (IEntityLocal) context.lookup("EntityBean/local");
+			local.save(playerCharacter);
+		} catch (NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
 }

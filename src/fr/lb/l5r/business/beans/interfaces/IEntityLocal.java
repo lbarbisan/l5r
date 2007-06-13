@@ -39,4 +39,10 @@ public interface IEntityLocal {
 	 * @return retourne la liste des objet qui correspondent au critère
 	 */
 	Collection<IEntity> find(Class entityClass, Map<String, Object> properties);
+	
+	/**
+	 * 
+	 * @param entity
+	 */
+	public void save(IEntity entity);
 }

@@ -18,41 +18,34 @@ import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.observable.Realm;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.databinding.swt.SWTObservables;
+import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.forms.widgets.ExpandableComposite;
 import org.eclipse.ui.forms.widgets.FormToolkit;
-import org.eclipse.ui.forms.widgets.Section;
 import org.eclipse.ui.part.EditorPart;
 
 import fr.lb.l5r.gui.databindings.DataBindingHelper;
+import fr.lb.l5r.gui.editor.input.PlayerEditorInput;
+import fr.lb.l5r.gui.editor.input.SearchPlayerEditorInput;
 import fr.lb.l5r.gui.search.SearchField;
-
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Table;
-import org.eclipse.jface.viewers.TableViewer;
-import org.eclipse.swt.widgets.TableColumn;
-import org.eclipse.swt.graphics.Font;
-import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.custom.CBanner;
-
-import com.sun.corba.se.spi.orbutil.fsm.Input;
 
 /**
  * An editor that presents a chat with a specified participant.
  */
 public class SearchPlayerEditor extends EditorPart {
 
-	public static String ID = "l5rgui.editor.PlayerEditor"; // @jve:decl-index=0:
+	public static String ID = "l5rgui.editor.SearchPlayerEditor"; // @jve:decl-index=0:
 
 	private Composite top = null;
 
@@ -61,8 +54,6 @@ public class SearchPlayerEditor extends EditorPart {
 	private Composite composite = null;
 
 	private Group group = null;
-
-	private Table table = null;
 
 	private Label lblName = null;
 
@@ -79,6 +70,8 @@ public class SearchPlayerEditor extends EditorPart {
 	private Button button = null;
 
 	private Composite composite1 = null;
+
+	private TableViewer tblSearchResult = null;
 
 	@Override
 	public void createPartControl(Composite parent) {
@@ -152,7 +145,7 @@ public class SearchPlayerEditor extends EditorPart {
 	}
 
 	private String getUser() {
-		return ((PlayerEditorInput) getEditorInput()).getName();
+		return (getEditorInput()).getName();
 	}
 
 	public void dispose() {
@@ -184,10 +177,8 @@ public class SearchPlayerEditor extends EditorPart {
 		composite = new Composite(top, SWT.NONE);
 		composite.setLayout(new GridLayout());
 		createGroup();
-		table = new Table(composite, SWT.NONE);
-		table.setHeaderVisible(true);
-		table.setLayoutData(gridData);
-		table.setLinesVisible(true);
+		tblSearchResult = new TableViewer(composite, SWT.NONE);
+		tblSearchResult.getTable().setLayoutData(gridData);
 	}
 
 	/**
@@ -218,7 +209,7 @@ public class SearchPlayerEditor extends EditorPart {
 		button.setText("Search");
 		button.addMouseListener(new org.eclipse.swt.events.MouseAdapter() {
 			public void mouseUp(org.eclipse.swt.events.MouseEvent e) {
-				//SearchPlayerEditor.this.get
+				((SearchPlayerEditorInput) SearchPlayerEditor.this.getEditorInput()).search(SearchPlayerEditor.this);
 				System.out.println("mouseUp()"); // TODO Auto-generated Event stub mouseUp()
 			}
 		});
@@ -258,5 +249,12 @@ public class SearchPlayerEditor extends EditorPart {
 	@SearchField
 	public Text getTxtSchool() {
 		return txtSchool;
+	}
+
+	/**
+	 * @return the tblSearchResult
+	 */
+	public TableViewer getTblSearchResult() {
+		return tblSearchResult;
 	}
 }  //  @jve:decl-index=0:visual-constraint="10,10,727,546"
