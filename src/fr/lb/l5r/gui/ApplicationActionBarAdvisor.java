@@ -36,6 +36,7 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
     // Actions - important to allocate these only in makeActions, and then use them
     // in the fill methods.  This ensures that the actions aren't recreated
     // when fillActionBars is called with FILL_PROXY.
+    private IWorkbenchAction saveAction;
     private IWorkbenchAction exitAction;
     private IWorkbenchAction aboutAction;
     private IWorkbenchAction createPlayerAction;
@@ -52,10 +53,14 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
         // The corresponding commands keybindings are defined in the plugin.xml file.
         // Registering also provides automatic disposal of the actions when
         // the window is closed.
+    	saveAction = ActionFactory.SAVE.create(window);
+    	register(saveAction);
         exitAction = ActionFactory.QUIT.create(window);
         register(exitAction);
+        
         aboutAction = ActionFactory.ABOUT.create(window);
         register(aboutAction);
+        
         createPlayerAction = new CreatePlayerAction(window);
         register(createPlayerAction);
         searchPlayerAction = new OpenSearchPlayerAction(window);
@@ -83,6 +88,7 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
         
         // File
         fileMenu.add(exitAction);
+        fileMenu.add(saveAction);
         // Player
         playerMenu.add(createPlayerAction);
         playerMenu.add(searchPlayerAction);

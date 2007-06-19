@@ -240,18 +240,45 @@ public class PlayerEditor extends EditorPart {
 
 	private Composite composite7 = null;
 
-	@Override
-	public void createPartControl(Composite parent) {
-		// TODO Auto-generated method stub
-		top = new Composite(parent, SWT.NONE);
-		top.setLayout(new FillLayout());
-		createComposite();
+
+	public PlayerEditor() {
+	}
+	
+	public void init(IEditorSite site, IEditorInput input)
+			throws PartInitException {
+		// POST-CONDITION
+		if (!(input instanceof PlayerEditorInput))
+			throw new PartInitException(
+					"Invalid Input: Must be PlayerEditorInput");
+	
+		// initialisation des variables
+		setSite(site);
+		setInput(input);
+		setPartName(getUser());
 	}
 
+	public boolean isDirty() {
+		return true;
+	}
+	public boolean isSaveAsAllowed() {
+		return false;
+	}
+	public void doSave(IProgressMonitor monitor) {
+		
+		((PlayerEditorInput) getEditorInput()).save();
+	}
+	public void doSaveAs() {
+	}
 	@Override
 	public void setFocus() {
 		// TODO Auto-generated method stub
 
+	}
+	public void dispose() {
+	}
+
+	private String getUser() {
+		return ((PlayerEditorInput) getEditorInput()).getName();
 	}
 
 	/**
@@ -266,6 +293,13 @@ public class PlayerEditor extends EditorPart {
 		return formToolkit;
 	}
 
+	@Override
+	public void createPartControl(Composite parent) {
+		// TODO Auto-generated method stub
+		top = new Composite(parent, SWT.NONE);
+		top.setLayout(new FillLayout());
+		createComposite();
+	}
 	/**
 	 * This method initializes composite
 	 * 
@@ -515,142 +549,6 @@ public class PlayerEditor extends EditorPart {
 		section2.setText("Identité");
 		section2.setLayoutData(gridData26);
 		section2.setClient(composite2);
-	}
-
-	public PlayerEditor() {
-	}
-
-	public void doSave(IProgressMonitor monitor) {
-		((PlayerEditorInput) getEditorInput()).save();
-	}
-
-	public void doSaveAs() {
-	}
-
-	public boolean isDirty() {
-		return true;
-	}
-
-	public boolean isSaveAsAllowed() {
-		return true;
-	}
-
-	private String getUser() {
-		return ((PlayerEditorInput) getEditorInput()).getName();
-	}
-
-	public void dispose() {
-	}
-
-	public void init(IEditorSite site, IEditorInput input)
-			throws PartInitException {
-		// POST-CONDITION
-		if (!(input instanceof PlayerEditorInput))
-			throw new PartInitException(
-					"Invalid Input: Must be PlayerEditorInput");
-
-		// initialisation des variables
-		setSite(site);
-		setInput(input);
-		setPartName(getUser());
-	}
-
-	/**
-	 * @return the txtAgility
-	 */
-	public Text getTxtAgility() {
-		return txtAgility;
-	}
-
-	/**
-	 * @return the txtAirRing
-	 */
-	public Text getTxtAirRing() {
-		return txtAirRing;
-	}
-
-	/**
-	 * @return the txtAwareness
-	 */
-	public Text getTxtAwareness() {
-		return txtAwareness;
-	}
-
-	/**
-	 * @return the txtEarthRing
-	 */
-	public Text getTxtEarthRing() {
-		return txtEarthRing;
-	}
-
-	/**
-	 * @return the txtFireRing
-	 */
-	public Text getTxtFireRing() {
-		return txtFireRing;
-	}
-
-	/**
-	 * @return the txtIntelligence
-	 */
-	public Text getTxtIntelligence() {
-		return txtIntelligence;
-	}
-
-	/**
-	 * @return the txtPerception
-	 */
-	public Text getTxtPerception() {
-		return txtPerception;
-	}
-
-	/**
-	 * @return the txtVoidRingPointsSpent
-	 */
-	public Text getTxtVoidRingPointsSpent() {
-		return txtVoidRingPointsSpent;
-	}
-
-	/**
-	 * @return the txtReflexes
-	 */
-	public Text getTxtReflexes() {
-		return txtReflexes;
-	}
-
-	/**
-	 * @return the txtStamina
-	 */
-	public Text getTxtStamina() {
-		return txtStamina;
-	}
-
-	/**
-	 * @return the txtStrength
-	 */
-	public Text getTxtStrength() {
-		return txtStrength;
-	}
-
-	/**
-	 * @return the txtVoidRing
-	 */
-	public Text getTxtVoidRing() {
-		return txtVoidRing;
-	}
-
-	/**
-	 * @return the txtWaterRing
-	 */
-	public Text getTxtWaterRing() {
-		return txtWaterRing;
-	}
-
-	/**
-	 * @return the txtWillPower
-	 */
-	public Text getTxtWillPower() {
-		return txtWillPower;
 	}
 
 	/**
@@ -996,5 +894,124 @@ public class PlayerEditor extends EditorPart {
 		composite7 = getFormToolkit().createComposite(composite);
 		composite7.setLayout(new GridLayout());
 		composite7.setLayoutData(gridData50);
+	}
+
+	/**
+	 * @return the txtAgility
+	 */
+	public Text getTxtAgility() {
+		return txtAgility;
+	}
+
+	/**
+	 * @return the txtAirRing
+	 */
+	public Text getTxtAirRing() {
+		return txtAirRing;
+	}
+
+	/**
+	 * @return the txtAwareness
+	 */
+	public Text getTxtAwareness() {
+		return txtAwareness;
+	}
+
+	/**
+	 * @return the txtEarthRing
+	 */
+	public Text getTxtEarthRing() {
+		return txtEarthRing;
+	}
+
+	/**
+	 * @return the txtFireRing
+	 */
+	public Text getTxtFireRing() {
+		return txtFireRing;
+	}
+
+	/**
+	 * @return the txtIntelligence
+	 */
+	public Text getTxtIntelligence() {
+		return txtIntelligence;
+	}
+
+	/**
+	 * @return the txtPerception
+	 */
+	public Text getTxtPerception() {
+		return txtPerception;
+	}
+
+	/**
+	 * @return the txtVoidRingPointsSpent
+	 */
+	public Text getTxtVoidRingPointsSpent() {
+		return txtVoidRingPointsSpent;
+	}
+
+	/**
+	 * @return the txtReflexes
+	 */
+	public Text getTxtReflexes() {
+		return txtReflexes;
+	}
+
+	/**
+	 * @return the txtStamina
+	 */
+	public Text getTxtStamina() {
+		return txtStamina;
+	}
+
+	/**
+	 * @return the txtStrength
+	 */
+	public Text getTxtStrength() {
+		return txtStrength;
+	}
+
+	/**
+	 * @return the txtVoidRing
+	 */
+	public Text getTxtVoidRing() {
+		return txtVoidRing;
+	}
+
+	/**
+	 * @return the txtWaterRing
+	 */
+	public Text getTxtWaterRing() {
+		return txtWaterRing;
+	}
+
+	/**
+	 * @return the txtWillPower
+	 */
+	public Text getTxtWillPower() {
+		return txtWillPower;
+	}
+
+	/**
+	 * @return the txtClan
+	 */
+	public Text getTxtClan() {
+		return txtClan;
+	}
+
+	/**
+	 * @return the txtName
+	 */
+	public Text getTxtName() {
+		return txtName;
+	}
+
+	/**
+	 * @return the txtSchool
+	 */
+	public Text getTxtSchool() {
+		return txtSchool;
 	}
 }  //  @jve:decl-index=0:visual-constraint="10,10,727,546"

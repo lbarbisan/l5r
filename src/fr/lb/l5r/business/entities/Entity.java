@@ -22,7 +22,7 @@ public class Entity extends AbstractEntity implements IEntity {
 	 * @see fr.lb.l5r.business.entities.Entity#getId()
 	 */
 	@Id	@GeneratedValue(strategy = GenerationType.AUTO)
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 	/**

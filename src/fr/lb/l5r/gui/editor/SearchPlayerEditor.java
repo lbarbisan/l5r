@@ -39,6 +39,7 @@ import fr.lb.l5r.gui.databindings.DataBindingHelper;
 import fr.lb.l5r.gui.editor.input.PlayerEditorInput;
 import fr.lb.l5r.gui.editor.input.SearchPlayerEditorInput;
 import fr.lb.l5r.gui.search.SearchField;
+import org.eclipse.swt.widgets.TableColumn;
 
 /**
  * An editor that presents a chat with a specified participant.
@@ -178,6 +179,14 @@ public class SearchPlayerEditor extends EditorPart {
 		composite.setLayout(new GridLayout());
 		createGroup();
 		tblSearchResult = new TableViewer(composite, SWT.NONE);
+		TableColumn tableColumn = new TableColumn(tblSearchResult.getTable(), SWT.NONE);
+		tableColumn.setWidth(60);
+		TableColumn tableColumn1 = new TableColumn(tblSearchResult.getTable(), SWT.NONE);
+		tableColumn1.setWidth(60);
+		TableColumn tableColumn2 = new TableColumn(tblSearchResult.getTable(), SWT.NONE);
+		tableColumn2.setWidth(60);
+		tblSearchResult.getTable().setHeaderVisible(true);
+		tblSearchResult.getTable().setLinesVisible(true);
 		tblSearchResult.getTable().setLayoutData(gridData);
 	}
 

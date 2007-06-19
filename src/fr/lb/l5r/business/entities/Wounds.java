@@ -14,7 +14,7 @@ public class Wounds implements IEntity {
 	/* (non-Javadoc)
 	 * @see fr.lb.marketManager.business.entities.interfaces.IEntity#getId()
 	 */
-	public int getId() {
+	public Integer getId() {
 		// TODO Auto-generated method stub
 		return 0;
 	}

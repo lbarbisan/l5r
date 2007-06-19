@@ -3,6 +3,8 @@
  */
 package fr.lb.l5r.gui.providers;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +14,6 @@ import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.graphics.Image;
 
 import fr.lb.l5r.business.entities.interfaces.IEntity;
-import fr.lb.l5r.gui.search.SearchHelper;
 
 /**
  * Cette classe est le provider par défaut d'un objet métier
@@ -36,7 +37,7 @@ public class EntityTableLabelProvider<T extends IEntity> extends LabelProvider i
 		{
 			for (int i = 0; i < propertiesName.length; i++) {
 				String string = propertiesName[i];
-				properties.add("get" + string.substring(1, 1).toUpperCase() + string.substring(2).toLowerCase());
+				properties.add("get" + string.substring(0, 1).toUpperCase() + string.substring(1).toLowerCase());
 			}
 		}
 	}
@@ -55,13 +56,19 @@ public class EntityTableLabelProvider<T extends IEntity> extends LabelProvider i
 		T entity = (T)element;
 
 		try {
-			entity.getClass().getMethod(properties.get(columnIndex), null);
+			Method method =  entity.getClass().getMethod(properties.get(columnIndex), null);
+			return (String) method.invoke(element, null);
 		} catch (SecurityException e) {
 			logger.error(e);
 		} catch (NoSuchMethodException e) {
 			logger.error(e);
+		} catch (IllegalArgumentException e) {
+			logger.error(e);
+		} catch (IllegalAccessException e) {
+			logger.error(e);
+		} catch (InvocationTargetException e) {
+			logger.error(e);
 		}
-		//FIXME: Monter les exceptions
 		
 		return "<ERROR>";
 	}

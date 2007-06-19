@@ -7,12 +7,15 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.ejb.SessionContext;
+import javax.ejb.Stateful;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.LockModeType;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.apache.log4j.Logger;
+import org.hibernate.LockMode;
 
 import fr.lb.l5r.business.beans.interfaces.IEntityLocal;
 import fr.lb.l5r.business.entities.interfaces.IEntity;
@@ -91,25 +94,41 @@ public class EntityBean implements IEntityLocal {
 		queryString.append("From ").append(entityClass.getSimpleName()).append(" as ").append(entityClass.getSimpleName().toLowerCase());
 
 		for (String field : properties.keySet()) {
-			logger.debug("create parameter '" + field + "'");
-			queryString.append((first == true ? "  where " : " and ")).append(
-					field.replace(entityClass.getSimpleName(), entityClass.getSimpleName().toLowerCase())).append(" like :").append(field);
-			if (first == true) {
-				first = false;
+			//TODO A voir si "" egal null lors du test
+			if (properties.get(field) == null 
+					|| "".equals(properties.get(field))) {
+				logger.debug("ignore parameter '" + field + "' because of null value");
+			} else {
+				logger.debug("create parameter '" + field + "'");
+				queryString.append((first == true ? "  where " : " and "));
+				queryString.append(field.replace(entityClass.getSimpleName(), entityClass.getSimpleName().toLowerCase())).append(" like :").append(field);
+				if (first == true) {
+					first = false;
+				}
 			}
 		}
 
 		Query query = em.createQuery(queryString.toString());
 		for (String field : properties.keySet()) {
 			logger.debug("get value for '" + field + "' : '" + properties.get(field) + "'");
-			query.setParameter(field, properties.get(field));
+//			TODO A voir si "" egal null lors du test
+			if (properties.get(field) != null 
+					&& !"".equals(properties.get(field))) {
+					query.setParameter(field, properties.get(field));
+			}
 			logger.debug("Search for " + queryString);
 		}
 		return query.getResultList();
 	}
-	
-	public void save(IEntity entity)
-	{
-		em.persist(entity);
+
+	public void save(IEntity entity) {
+		if (entity.getId() != null) {
+			// En Stateless, il est necessaire de ratacher l'objet
+			em.merge(entity);
+			em.flush();
+		} else {
+			// Si l'objet n'existe pas alors persist
+			em.persist(entity);
+		}
 	}
 }
